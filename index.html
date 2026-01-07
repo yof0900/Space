@@ -1,172 +1,553 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>9chオカ板まとめ</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>オカルト板まとめ — 公式アーカイブ（個人運用）</title>
+
+<!-- ============================
+スタイル（アニメーション無し）
+- 横書き
+- 胡散臭いが統一感ある配色
+- スマホ優先レスポンシブ
+============================ -->
 <style>
-body {
-margin: 0;
-font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-background: #f8f8f8;
-color: #222;
+/* --- リセット的な最低限 --- */
+* { box-sizing: border-box; }
+html,body { height:100%; margin:0; padding:0; -webkit-text-size-adjust:100%; }
+body{
+font-family: "Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP","MS PGothic",sans-serif;
+background:#ffffff; /* 白基調（胡散臭さは文言と配置で出す） */
+color:#111;
+line-height:1.6;
+font-size:15px;
+-webkit-font-smoothing:antialiased;
 }
 
-header {
-background: #292929;
-padding: 18px 24px;
-color: #fff;
-font-size: 22px;
-font-weight: bold;
-letter-spacing: .6px;
-text-shadow: 0 1px 0 rgba(0,0,0,0.3);
-border-bottom: 3px solid #444;
+/* ===== 全体ラッパー ===== */
+.wrapper {
+max-width:1200px;
+margin:14px auto;
+padding:12px;
 }
 
-.container {
-max-width: 960px;
-margin: 18px auto;
-padding: 0 12px;
+/* ===== ヘッダー（story と同じ見た目に統一） =====
+class 名は .header を使う（story 側と合わせるため）。 */
+.header {
+display:flex;
+align-items:center;
+gap:14px;
+padding:16px;
+border-radius:10px;
+background: linear-gradient(90deg,#081426,#0b2540); /* story と同じ */
+color:#fff;
+box-shadow: 0 8px 30px rgba(2,6,23,0.08);
+}
+.logo {
+width:72px;
+height:72px;
+border-radius:8px;
+background: linear-gradient(135deg,#f6efe8,#d8cfc6);
+color:#0b243a;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:800;
+letter-spacing:0.06em;
+font-size:18px;
+box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+}
+.header-title { display:flex; flex-direction:column; }
+.header-title h1 { margin:0; font-size:20px; }
+.header-title p { margin:6px 0 0; font-size:12px; color:#cfe6ff; }
+
+/* 運営表記（胡散臭く“非公開”を強調） */
+.header-meta { margin-left:auto; text-align:right; font-size:12px; color:#dbeeff; }
+.header-meta .reg { color:#cfe6ff; font-weight:700; }
+
+/* ===== トップ操作（検索等） ===== */
+.topbar {
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+justify-content:space-between;
+align-items:center;
+margin-top:12px;
+}
+.searchbar {
+display:flex;
+gap:8px;
+align-items:center;
+}
+.searchbar input[type="search"] {
+width:420px;
+max-width:60vw;
+padding:10px 12px;
+border-radius:8px;
+border:1px solid #e6e7ee;
+background:#fff;
+font-size:14px;
+}
+.controls {
+display:flex;
+gap:8px;
+align-items:center;
+}
+.select, .btn {
+padding:8px 12px;
+border-radius:8px;
+border:1px solid #e6e7ee;
+background:#fff;
+font-size:13px;
+cursor:pointer;
+}
+.btn.primary {
+background:#fff7e8;
+border-color:#f0d7b0;
+color:#3a2a12;
+font-weight:800;
 }
 
-.list {
-margin: 0;
-padding: 0;
-list-style: none;
+/* ===== レイアウト: 3カラム風（左ナビ、中央コンテンツ、右サイド） ===== */
+.columns {
+display:grid;
+grid-template-columns: 240px 1fr 320px;
+gap:16px;
+margin-top:14px;
+align-items:start;
 }
 
-.list li {
-background: #fff;
-margin: 10px 0;
-padding: 14px 18px;
-border: 1px solid #ddd;
-border-radius: 8px;
-box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-transition: transform .12s ease, border-color .12s ease;
+/* --- 左カラム --- */
+.left { position:sticky; top:14px; align-self:start; }
+.card {
+background:#fff;
+border:1px solid #eee;
+padding:12px;
+margin-bottom:12px;
+border-radius:8px;
+font-size:14px;
 }
 
-.list li:hover {
-transform: translateY(-2px);
-border-color: #bbb;
+/* ナビ風リンク */
+.nav a {
+display:block;
+padding:8px 10px;
+text-decoration:none;
+color:#123a66;
+font-weight:700;
+border-radius:6px;
+margin-bottom:6px;
+background:#fbfcfd;
+border:1px solid #f0f4fb;
 }
 
-.title {
-font-size: 16px;
-font-weight: bold;
-color: #0077cc;
-text-decoration: none;
+/* --- 中央カラム（記事8件） --- */
+.center {}
+.headline { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.headline h2 { margin:0; font-size:18px; color:#0b2a50; }
+.headline .meta { font-size:13px; color:#6b6f76; }
+
+/* グリッド（2カラム→スマホ1カラム） */
+.grid {
+display:grid;
+grid-template-columns: repeat(2, 1fr);
+gap:12px;
 }
 
-.title:hover {
-color: #dd0000;
-text-decoration: underline;
+/* 記事カード（アニメーション無し） */
+.article {
+display:flex;
+gap:12px;
+align-items:flex-start;
+background:#fff;
+border:1px solid #eceff6;
+padding:14px;
+border-radius:10px;
+}
+.thumb {
+width:136px;
+height:92px;
+background:#fbfbff;
+border:1px solid #eef2ff;
+display:flex; align-items:center; justify-content:center;
+color:#6f7f9a;
+font-size:12px;
+border-radius:6px;
+}
+.article-body { flex:1; min-width:0; }
+.title { margin:0 0 6px 0; font-weight:800; color:#072244; font-size:15px; line-height:1.25; }
+.excerpt { margin:0 0 8px 0; color:#444; font-size:13px; }
+.meta-line { font-size:12px; color:#777; display:flex; gap:8px; align-items:center; }
+
+/* 胡散臭いバッジ */
+.badge {
+display:inline-block;
+padding:6px 8px;
+border-radius:8px;
+font-weight:800;
+font-size:12px;
+color:#6a1b1b;
+background:#fff1f1;
+border:1px solid #ffdfdf;
+margin-right:8px;
 }
 
-.meta {
-margin-top: 6px;
-font-size: 12px;
-color: #555;
+/* --- 右カラム（広告・注目） --- */
+.right { position:sticky; top:14px; }
+.ad {
+background:#fff;
+border:1px solid #f3e9d7;
+padding:14px;
+border-radius:10px;
+margin-bottom:12px;
+text-align:left;
 }
+.ad h4 { margin:0 0 8px 0; font-size:14px; color:#5b3a1a; }
+.ad p { margin:0; font-size:13px; color:#6b4f3a; }
+.ad .cta { display:inline-block; margin-top:10px; padding:8px 10px; border-radius:8px; background:#fff1d9; color:#2b1600; text-decoration:none; font-weight:700; }
 
-.tag {
-display: inline-block;
-padding: 2px 6px;
-font-size: 10px;
-background: #eee;
-color: #666;
-border-radius: 4px;
-margin-right: 6px;
-}
-
-.tag.horror { background:#ffc8c8; color:#b30000;}
-.tag.news { background:#c8dffc; color:#004a9f;}
-.tag.info { background:#d8ffd8; color:#006f00;}
-.tag.fan { background:#f9f0d8; color:#826300;}
-
+/* フッター系情報 */
 .footer {
-text-align: center;
-margin: 36px 0;
-font-size: 13px;
-color: #888;
+margin-top:18px; padding:16px; background:#fff; border:1px solid #eee; border-radius:8px; font-size:13px; color:#6b6f76;
+}
+
+/* ===== レスポンシブ（モバイル優先） ===== */
+@media (max-width:980px) {
+.columns { grid-template-columns: 1fr; }
+.left, .right { position:relative; top:auto; width:100%; }
+.grid { grid-template-columns: 1fr; }
+.searchbar input[type="search"] { width:100%; max-width:100%; }
+.logo { width:56px; height:56px; font-size:16px; }
+.header { padding:12px; gap:10px; }
+.wrapper { padding:10px; }
+}
+@media (max-width:520px) {
+.searchbar input[type="search"] { padding:12px 14px; font-size:16px; }
+.btn, .select { padding:10px 12px; font-size:15px; }
+.thumb { width:116px; height:80px; }
 }
 </style>
 </head>
 <body>
-<header>9chオカ板まとめ</header>
 
-<div class="container">
-<ul class="list">
+<div class="wrapper">
 
-<li>
-<a class="title" href="story.html">【実話？】The tragic space知ってる奴いる？【白い施設】</a>
-<div class="meta">
-<span class="tag horror">怪談</span>
-投稿日: 2026/01/07 | コメント: 0
+<!-- === ヘッダー（story と同じ見た目） === -->
+<header class="header" role="banner">
+<div class="logo">オカ</div>
+<div class="header-title">
+<h1>オカルト板まとめ</h1>
+<p>個人保管 / 見るだけログ — 非公式アーカイブ</p>
 </div>
-</li>
-
-<li>
-<a class="title" href="404.html">【都市伝説】"めめめ"について</a>
-<div class="meta">
-<span class="tag horror">都市伝説</span>
-投稿日: 2026/01/06 | コメント: 3
+<div class="header-meta">
+<div>運営: <span class="reg">非公開格納室</span></div>
+<div style="margin-top:6px;">最終更新: 2026/01/07</div>
 </div>
-</li>
+</header>
 
-<li>
-<a class="title" href="404.html">【検証】夜の森で撮れた映像</a>
-<div class="meta">
-<span class="tag horror">検証</span>
-投稿日: 2026/01/05 | コメント: 8
+<!-- === 検索・操作 === -->
+<div class="topbar" role="region" aria-label="検索と操作">
+<div class="searchbar">
+<input id="query" type="search" placeholder="タイトル・タグで検索（例：怪談）" aria-label="スレッド検索">
+<select id="tagFilter" class="select" aria-label="タグ絞り込み">
+<option value="">全てのタグ</option>
+<option value="怪談">怪談</option>
+<option value="都市伝説">都市伝説</option>
+<option value="検証">検証</option>
+<option value="画像">画像</option>
+<option value="雑談">雑談</option>
+</select>
+<select id="sort" class="select" aria-label="並び替え">
+<option value="new">新着順</option>
+<option value="comments">コメント数順</option>
+</select>
+<button id="clearBtn" class="btn">クリア</button>
 </div>
-</li>
 
-<li>
-<a class="title" href="404.html">【画像】地方の雑居ビル</a>
-<div class="meta">
-<span class="tag horror">画像</span>
-投稿日: 2026/01/04 | コメント: 12
+<div class="controls" role="toolbar" aria-label="操作">
+<div style="font-size:13px;color:#666;">表示: <strong id="count">8</strong> 件</div>
+<button id="highlightNew" class="btn primary">新着を示す</button>
 </div>
-</li>
-
-<li>
-<a class="title" href="404.html">【情報】未確認飛行物体目撃談</a>
-<div class="meta">
-<span class="tag info">UFO</span>
-投稿日: 2026/01/03 | コメント: 5
 </div>
-</li>
 
-<li>
-<a class="title" href="404.html">【速報】奇妙なニュースまとめ</a>
-<div class="meta">
-<span class="tag news">速報</span>
-投稿日: 2026/01/02 | コメント: 17
+<!-- === 三カラム === -->
+<div class="columns">
+
+<!-- LEFT: ナビ -->
+<aside class="left" aria-label="サイドナビ">
+<div class="card nav">
+<strong style="display:block; margin-bottom:8px;">板ナビ</strong>
+<a href="index.html">トップ</a>
+<a href="boards/haunted_house.html">幽霊屋敷まとめ</a>
+<a href="boards/vanishing_stop.html">消えるバス停</a>
+<a href="boards/ghost_toys.html">呪いのおもちゃ</a>
+<a href="boards/urban_legends.html">都市伝説</a>
 </div>
-</li>
 
-<li>
-<a class="title" href="404.html">【雑談】怖い話ファン集合</a>
-<div class="meta">
-<span class="tag fan">雑談</span>
-投稿日: 2026/01/01 | コメント: 42
-</div>
-</li>
-
-<li>
-<a class="title" href="404.html">【まとめ】幽霊屋敷訪問記録</a>
-<div class="meta">
-<span class="tag horror">まとめ</span>
-投稿日: 2025/12/31 | コメント: 23
-</div>
-</li>
-
+<div class="card">
+<strong style="display:block; margin-bottom:8px;">最新コメント</strong>
+<ul style="margin:0; padding-left:16px; color:#555; font-size:13px;">
+<li>Qp9aLx3K0 — The tragic spaceについて（1時間前）</li>
+<li>aaL0kQe20 — 雑談（2時間前）</li>
+<li>Kq91ZxL00 — 検証（昨日）</li>
 </ul>
+</div>
 
-<div class="footer">
-※このサイトは
+<div class="card">
+<strong style="display:block; margin-bottom:8px;">タグ</strong>
+<div style="display:flex;flex-wrap:wrap;gap:8px;">
+<button class="btn tagBtn" data-tag="怪談">怪談</button>
+<button class="btn tagBtn" data-tag="都市伝説">都市伝説</button>
+<button class="btn tagBtn" data-tag="検証">検証</button>
+<button class="btn tagBtn" data-tag="画像">画像</button>
 </div>
 </div>
+
+<div class="card">
+<strong style="display:block; margin-bottom:8px;">運営注記</strong>
+<div style="color:#555; font-size:13px;">
+・存在しないリンクは意図的に未公開です。<br>
+・外部リンクは参考用に置いてあります（真偽は不明）。<br>
+・ファイル名は小文字で揃えてください。
+</div>
+</div>
+</aside>
+
+<!-- CENTER: 記事グリッド（8件） -->
+<main class="center" role="main" aria-label="注目記事">
+<div class="card">
+<div class="headline">
+<h2>厳選まとめ（最新 8 件）</h2>
+<div class="meta">表示中: <span id="metaCount">8</span> 件</div>
+</div>
+
+<div class="grid" id="grid">
+
+<!-- a1 -->
+<article class="article" data-tags="怪談,怪異" data-comments="0" data-date="2026-01-07">
+<div class="thumb">写真: 深夜の廊下</div>
+<div class="article-body">
+<div>
+<span class="badge">NEW</span>
+<a class="title" href="story1.html">【閲覧注意】深夜の物音 / 誰もいないはずの部屋</a>
+</div>
+<p class="excerpt">深夜2時に家の中で鳴る足音。投稿者が録音・記録した詳細ログを公開。</p>
+<div class="meta-line"><span>オカルト板</span><span>コメント 0</span><span>2026/01/07</span></div>
+</div>
+</article>
+
+<!-- a2 -->
+<article class="article" data-tags="都市伝説" data-comments="3" data-date="2026-01-06">
+<div class="thumb">地図: 消えるバス停</div>
+<div class="article-body">
+<div><a class="title" href="story2.html">【都市伝説】消える公衆電話の噂</a></div>
+<p class="excerpt">深夜の公衆電話が消えるという目撃記録。写真と地図メモを収録。</p>
+<div class="meta-line"><span>都市伝説</span><span>コメント 3</span><span>2026/01/06</span></div>
+</div>
+</article>
+
+<!-- a3 (404 想定) -->
+<article class="article" data-tags="検証" data-comments="8" data-date="2026-01-05">
+<div class="thumb">映像: 夜の森</div>
+<div class="article-body">
+<div><a class="title" href="boards/mysterious_forest.html">【検証】夜の森で撮れた映像</a></div>
+<p class="excerpt">夜間に撮影された不審映像。音声ログと解析メモを掲載（未公開部分あり）。</p>
+<div class="meta-line"><span>検証</span><span>コメント 8</span><span>2026/01/05</span></div>
+</div>
+</article>
+
+<!-- a4 (404 想定) -->
+<article class="article" data-tags="画像,怪談" data-comments="12" data-date="2026-01-04">
+<div class="thumb">画像: 呪いの玩具</div>
+<div class="article-body">
+<div><a class="title" href="boards/ghost_toys.html">【画像】呪われたおもちゃのまとめ</a></div>
+<p class="excerpt">古いおもちゃが写る一連の写真。不可解な影や経年劣化の説明あり。</p>
+<div class="meta-line"><span>画像</span><span>コメント 12</span><span>2026/01/04</span></div>
+</div>
+</article>
+
+<!-- a5 (外部) -->
+<article class="article" data-tags="翻訳" data-comments="21" data-date="2026-01-03">
+<div class="thumb">翻訳: 海外掲示板</div>
+<div class="article-body">
+<div><span class="badge" style="background:#fff4d6;color:#684d00">外部</span><a class="title" href="https://example.com/fake-foreign-ghosts" target="_blank" rel="noopener">海外心霊掲示板翻訳</a></div>
+<p class="excerpt">英語圏掲示板の怪奇スレを抄訳。原文への参照リンクを併記。</p>
+<div class="meta-line"><span>翻訳</span><span>コメント 21</span><span>2026/01/03</span></div>
+</div>
+</article>
+
+<!-- a6 (404 想定) -->
+<article class="article" data-tags="雑談" data-comments="42" data-date="2026-01-01">
+<div class="thumb">雑談: ファン集合</div>
+<div class="article-body">
+<div><a class="title" href="boards/fan_creepy.html">【雑談】怖い話ファン集合</a></div>
+<p class="excerpt">常連による「怖い話」コレクション。思い出話・体験談が中心。</p>
+<div class="meta-line"><span>雑談</span><span>コメント 42</span><span>2026/01/01</span></div>
+</div>
+</article>
+
+<!-- a7 -->
+<article class="article" data-tags="まとめ" data-comments="23" data-date="2025-12-31">
+<div class="thumb">ログ: 幽霊屋敷</div>
+<div class="article-body">
+<div><a class="title" href="story3.html">【まとめ】幽霊屋敷訪問記録</a></div>
+<p class="excerpt">探索グループが残した訪問メモ。間取り図と音声ログ付きのまとめ。</p>
+<div class="meta-line"><span>まとめ</span><span>コメント 23</span><span>2025/12/31</span></div>
+</div>
+</article>
+
+<!-- a8 -->
+<article class="article" data-tags="UFO,情報" data-comments="5" data-date="2025-12-30">
+<div class="thumb">目撃: 未確認飛行物体</div>
+<div class="article-body">
+<div><a class="title" href="story4.html">【情報】未確認飛行物体目撃談</a></div>
+<p class="excerpt">地方でのUFO目撃談をまとめたレポート。写真あり（真偽未確認）。</p>
+<div class="meta-line"><span>UFO</span><span>コメント 5</span><span>2025/12/30</span></div>
+</div>
+</article>
+
+</div>
+</div>
+
+<!-- simple pager -->
+<div style="margin-top:12px; text-align:center;">
+<button class="btn">1</button>
+<button class="btn">2</button>
+<button class="btn">次へ</button>
+</div>
+</main>
+
+<!-- RIGHT: ads / spotlight -->
+<aside class="right" aria-label="サイド情報">
+<div class="ad">
+<h4>── この空間に違和感はありませんか？ ──</h4>
+<p>空間認知補正機構 / 非公開観測</p>
+<a class="cta" href="space_ad.html">詳しく見る</a>
+</div>
+
+<div class="card">
+<strong style="display:block; margin-bottom:8px;">注目トピック</strong>
+<ul style="margin:0; padding-left:16px; color:#444;">
+<li>・深夜ノイズの録音解析</li>
+<li>・消える地名の記録</li>
+<li>・呪われた玩具の調査メモ</li>
+</ul>
+</div>
+
+<div class="card">
+<strong style="display:block; margin-bottom:8px;">アーカイブ</strong>
+<div style="color:#666;">2026/01 (8) · 2025/12 (18) · 2025/11 (7) · 全アーカイブ</div>
+</div>
+
+<div class="card">
+<strong style="display:block; margin-bottom:8px;">協力者募集</strong>
+<div style="color:#666; font-size:13px;">
+記録を寄せたい方は、ページ内の「連絡」リンクを参照してください（連絡先は公開していません）。
+</div>
+</div>
+</aside>
+
+</div> <!-- columns -->
+
+<footer class="footer" role="contentinfo">
+このサイトは個人運営のアーカイブです。掲載情報は必ずしも真実を保証するものではありません。存在しないURLは意図的に未公開（404）にしています。
+</footer>
+
+</div> <!-- wrapper -->
+
+<!-- ============================
+JavaScript：検索・フィルタ・ソート（動作はするが視覚の動きは無し）
+============================ -->
+<script>
+(function(){
+
+const grid = document.getElementById('grid');
+const items = Array.from(grid.querySelectorAll('.article'));
+const query = document.getElementById('query');
+const tagFilter = document.getElementById('tagFilter');
+const sort = document.getElementById('sort');
+const clearBtn = document.getElementById('clearBtn');
+const tagBtns = Array.from(document.querySelectorAll('.tagBtn'));
+const countEl = document.getElementById('count');
+const metaCount = document.getElementById('metaCount');
+
+function updateCounts() {
+const visible = items.filter(i => i.style.display !== 'none').length;
+countEl.textContent = visible;
+metaCount.textContent = visible;
+}
+
+function matches(item, q, tag) {
+const title = (item.querySelector('.title')||{}).textContent || '';
+const excerpt = (item.querySelector('.excerpt')||{}).textContent || '';
+const tags = (item.getAttribute('data-tags')||'').toLowerCase();
+let ok = true;
+if(q) {
+const qq = q.toLowerCase();
+ok = title.toLowerCase().includes(qq) || excerpt.toLowerCase().includes(qq) || tags.includes(qq);
+}
+if(ok && tag) {
+ok = tags.includes(tag.toLowerCase());
+}
+return ok;
+}
+
+function applyFilter() {
+const q = query.value.trim();
+const tag = tagFilter.value;
+items.forEach(item => {
+item.style.display = matches(item, q, tag) ? 'flex' : 'none';
+});
+updateCounts();
+}
+
+function applySort() {
+const mode = sort.value;
+const arr = items.slice();
+arr.sort((A,B)=> {
+if(mode === 'comments') {
+return parseInt(B.getAttribute('data-comments')||0) - parseInt(A.getAttribute('data-comments')||0);
+} else {
+return new Date(B.getAttribute('data-date')) - new Date(A.getAttribute('data-date'));
+}
+});
+arr.forEach(a => grid.appendChild(a));
+}
+
+// events
+query.addEventListener('input', applyFilter);
+tagFilter.addEventListener('change', applyFilter);
+sort.addEventListener('change', () => { applySort(); applyFilter(); });
+clearBtn.addEventListener('click', () => {
+query.value = ''; tagFilter.value = ''; sort.value = 'new';
+applySort(); applyFilter();
+});
+
+tagBtns.forEach(b => b.addEventListener('click', () => {
+const t = b.getAttribute('data-tag');
+query.value = t; tagFilter.value = t;
+applyFilter();
+}));
+
+// initial
+applySort();
+applyFilter();
+
+// highlight newest (no animation): just change background color statically
+document.getElementById('highlightNew').addEventListener('click', function(){
+let newest = null, newestTime = 0;
+items.forEach(i => {
+const d = new Date(i.getAttribute('data-date')).getTime();
+if(!isNaN(d) && d > newestTime){ newest = i; newestTime = d; }
+i.style.background = ''; // reset
+});
+if(newest) newest.style.background = '#fff9eb';
+});
+
+console.log('[local] index rebuilt - items:', items.length);
+
+})();
+</script>
 
 </body>
 </html>
