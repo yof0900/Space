@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 Not Found - オカ板まとめ</title>
+
+<style>
+body {
+margin: 0;
+font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+background: #f5f5f5;
+color: #222;
+}
+
+header {
+background: #2a2a2a;
+color: #fff;
+padding: 16px 24px;
+font-size: 20px;
+font-weight: bold;
+border-bottom: 3px solid #444;
+}
+
+.container {
+max-width: 860px;
+margin: 40px auto;
+padding: 0 16px;
+}
+
+.box {
+background: #fff;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 28px;
+box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+position: relative;
+overflow: hidden;
+}
+
+.error-code {
+font-size: 72px;
+font-weight: bold;
+color: #a80000;
+letter-spacing: 4px;
+}
+
+.error-title {
+font-size: 20px;
+font-weight: bold;
+margin-bottom: 16px;
+}
+
+.message {
+font-size: 14px;
+line-height: 1.9;
+color: #333;
+}
+
+.warn {
+color: #a80000;
+font-weight: bold;
+}
+
+.hr {
+margin: 24px 0;
+border-top: 1px dashed #ccc;
+}
+
+.links a {
+display: inline-block;
+margin-right: 18px;
+font-size: 14px;
+color: #0066cc;
+text-decoration: none;
+}
+
+.links a:hover {
+color: #cc0000;
+text-decoration: underline;
+}
+
+.footnote {
+margin-top: 26px;
+font-size: 12px;
+color: #777;
+line-height: 1.7;
+}
+
+/* 不穏な影 */
+.box::after {
+content: "";
+position: absolute;
+inset: 0;
+background: radial-gradient(circle at 80% 20%, rgba(168,0,0,0.05), transparent 40%);
+pointer-events: none;
+}
+
+/* ログ風テキスト（最初は非表示） */
+.admin-log {
+display: none;
+margin-top: 28px;
+padding: 16px;
+background: #111;
+color: #cfcfcf;
+font-family: monospace;
+font-size: 12px;
+line-height: 1.7;
+border-radius: 6px;
+}
+
+.admin-log .alert {
+color: #ff6b6b;
+}
+
+/* フェード演出 */
+.fade {
+opacity: 0;
+transition: opacity 1.5s ease;
+}
+.fade.show {
+opacity: 1;
+}
+</style>
+</head>
+
+<body>
+<header>オカ板まとめ</header>
+
+<div class="container">
+<div class="box">
+
+<div class="error-code">404</div>
+<div class="error-title">Not Found — スレッドが見つかりません</div>
+
+<div class="message fade" id="mainMessage">
+お探しのページは以下の理由により表示できません。<br><br>
+
+・そのスレッドは <span class="warn">存在しない板</span> に属しています。<br>
+・管理人により <span class="warn">削除</span>、または <span class="warn">隔離</span> されました。<br>
+・URLが間違っている可能性があります。<br><br>
+
+※このページはログに記録されます。
+</div>
+
+<div class="hr"></div>
+
+<div class="links fade" id="links">
+<a href="index.html">▶ まとめトップに戻る</a>
+<a href="javascript:history.back()">▶ 前のページに戻る</a>
+</div>
+
+<div class="admin-log fade" id="adminLog">
+[system] request_id: 9f2c-404-oclt
+[system] status: NOT_FOUND
+[system] board_check: failed
+[system] access_time: <span id="time"></span>
+
+<span class="alert">[alert]</span> 非公開ログへのアクセスが試行されました
+<span class="alert">[alert]</span> この操作は記録されました
+</div>
+
+<div class="footnote fade" id="footnote">
+※表示されないページについて、管理人への問い合わせは受け付けていません。<br>
+※一定回数以上のアクセスは自動的に制限される場合があります。
+</div>
+
+</div>
+</div>
+
+<script>
+// 時刻表示
+document.getElementById("time").textContent =
+new Date().toLocaleString("ja-JP");
+
+// フェードイン演出
+setTimeout(() => {
+document.getElementById("mainMessage").classList.add("show");
+}, 400);
+
+setTimeout(() => {
+document.getElementById("links").classList.add("show");
+}, 900);
+
+// 管理人ログ表示（遅れて出る）
+setTimeout(() => {
+const log = document.getElementById("adminLog");
+log.style.display = "block";
+log.classList.add("show");
+}, 2200);
+
+// フッター表示
+setTimeout(() => {
+document.getElementById("footnote").classList.add("show");
+}, 3000);
+
+// 404迷路：一定確率で別の404へ飛ばす（実在しないURL）
+setTimeout(() => {
+if (Math.random() < 0.18) {
+window.location.href = "boards/hidden_log_" + Math.floor(Math.random()*9999) + ".html";
+}
+}, 4200);
+</script>
+
+</body>
+</html>
