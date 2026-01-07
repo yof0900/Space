@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>空間認知補正機構 — ご案内（非公開調査）</title>
+<meta name="format-detection" content="telephone=no,email=no,address=no">
+<style>
+/* ===========================
+空間認知補正機構（広告ページ）
+白基調 / 横書き / アニメーションなし
+=========================== */
+
+/* Reset-ish */
+* { box-sizing: border-box; }
+html,body { height:100%; margin:0; padding:0; }
+body {
+font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+background: #ffffff; /* 白基調 */
+color: #111214;
+-webkit-font-smoothing:antialiased;
+line-height:1.75;
+font-size:16px;
+}
+
+/* Page wrapper */
+.container {
+max-width:1100px;
+margin:18px auto;
+padding:20px;
+}
+
+/* Header — corporate but slightly off */
+.header {
+display:flex;
+gap:18px;
+align-items:center;
+padding:18px 20px;
+border-radius:10px;
+background: linear-gradient(180deg, #ffffff, #fbfbfd);
+border:1px solid #ececec;
+box-shadow: 0 10px 30px rgba(2,6,23,0.03);
+}
+.logo {
+width:84px;
+height:84px;
+border-radius:8px;
+background:#fff;
+border:1px solid #e6e6e6;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:800;
+color:#0b2a50;
+font-size:20px;
+letter-spacing:0.06em;
+}
+.org-name {
+display:flex;
+flex-direction:column;
+}
+.org-name .title {
+margin:0;
+font-size:18px;
+color:#0b2540;
+letter-spacing:0.03em;
+font-weight:800;
+}
+.org-name .subtitle {
+margin-top:6px;
+color:#7f8a95;
+font-size:13px;
+}
+
+/* Right header meta (registry / contact) */
+.header-meta {
+margin-left:auto;
+text-align:right;
+font-size:13px;
+color:#8a8f94;
+}
+.header-meta .regnum {
+display:block;
+font-family: monospace;
+color:#444;
+margin-top:6px;
+}
+
+/* Main layout: two-column on desktop; single column on mobile */
+.main {
+display:grid;
+grid-template-columns: 1fr 360px;
+gap:18px;
+margin-top:18px;
+}
+
+/* Left: content card (wide, white) */
+.content {
+background:#fff;
+border:1px solid #e9edf2;
+border-radius:10px;
+padding:22px;
+box-shadow: 0 8px 22px rgba(2,6,23,0.03);
+}
+
+/* Title block inside content */
+.content .lead {
+font-size:20px;
+margin-bottom:12px;
+color:#072244;
+font-weight:800;
+letter-spacing:0.02em;
+}
+.content .subtitle {
+color:#6b6f76;
+margin-bottom:18px;
+font-size:14px;
+}
+
+/* Section headings */
+.h2 {
+display:block;
+font-size:16px;
+color:#0f2a44;
+font-weight:700;
+margin:18px 0 10px 0;
+}
+
+/* paragraphs */
+.content p {
+margin:0 0 12px 0;
+color:#222;
+font-size:15px;
+line-height:1.8;
+}
+
+/* Notice box (caution) */
+.notice {
+border-left:4px solid #b33b3b;
+background:#fff8f8;
+padding:12px 14px;
+color:#7a2b2b;
+margin:12px 0;
+font-size:14px;
+}
+
+/* Two-column details box */
+.grid-2 {
+display:grid;
+grid-template-columns: 1fr 1fr;
+gap:12px;
+margin-top:12px;
+}
+.detail-card {
+background:#fcfcfd;
+border:1px solid #f0f2f6;
+padding:12px;
+border-radius:8px;
+font-size:14px;
+color:#333;
+}
+
+/* FAQ list */
+.faq dt {
+font-weight:700;
+margin-top:12px;
+color:#1b2f49;
+}
+.faq dd {
+margin:6px 0 12px 0;
+color:#333;
+font-size:14px;
+line-height:1.75;
+}
+
+/* Small monospace footnotes */
+.footnote {
+font-size:13px;
+color:#8a8d90;
+margin-top:10px;
+white-space:pre-line;
+}
+
+/* Simulated form (does not post externally) */
+.form {
+margin-top:12px;
+border:1px solid #eef0f3;
+background:#fff;
+padding:12px;
+border-radius:8px;
+}
+.form label {
+display:block;
+font-size:13px;
+color:#333;
+margin-bottom:6px;
+}
+.form input[type="text"], .form textarea, .form select {
+width:100%;
+padding:10px 12px;
+border:1px solid #e6e8eb;
+border-radius:6px;
+background:#fff;
+font-size:14px;
+color:#222;
+margin-bottom:10px;
+}
+.form textarea { min-height:120px; resize:vertical; }
+
+/* Form actions */
+.form-actions {
+display:flex;
+gap:8px;
+align-items:center;
+}
+.btn {
+padding:10px 14px;
+border-radius:8px;
+border:1px solid #d6dbe8;
+background:#fff;
+cursor:pointer;
+font-size:14px;
+}
+.btn.primary {
+background:#fff7e8;
+border-color:#f0d7b0;
+color:#3a2a12;
+font-weight:700;
+}
+
+/* Right column: aside (distinct, corporate blocks) */
+.aside {
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+.aside .panel {
+background:#fff;
+border:1px solid #f0f2f4;
+padding:14px;
+border-radius:8px;
+font-size:14px;
+color:#333;
+}
+.aside .panel h4 {
+margin:0 0 8px 0;
+color:#0b2540;
+font-size:15px;
+}
+.aside .panel p { margin:0; color:#555; line-height:1.6; }
+
+/* subtle table for "調査報告" */
+.report-table {
+width:100%;
+border-collapse:collapse;
+margin-top:8px;
+font-size:14px;
+}
+.report-table th, .report-table td {
+border:1px solid #f0f2f4;
+padding:8px 10px;
+text-align:left;
+color:#333;
+}
+.report-table th {
+background:#fbfdff;
+color:#0b2540;
+font-weight:700;
+}
+
+/* disclaimer heavy block (very corporate-sounding) */
+.disclaimer {
+margin-top:18px;
+padding:14px;
+background:#fbfbfb;
+border:1px solid #ececec;
+color:#666;
+font-size:13px;
+line-height:1.7;
+border-radius:8px;
+}
+
+/* footer with micro-legal */
+.footer {
+margin-top:18px;
+text-align:center;
+font-size:13px;
+color:#8a8d90;
+padding:12px 0;
+border-top:1px solid #f0f2f4;
+}
+
+/* Responsive behavior: single column under 960px */
+@media (max-width:960px){
+.main { grid-template-columns: 1fr; }
+.logo { width:64px; height:64px; font-size:18px; }
+.header { padding:12px; gap:12px; }
+.container { padding:14px; }
+.grid-2 { grid-template-columns: 1fr; }
+.aside { order:2; }
+.content { order:1; }
+.report-table th, .report-table td { font-size:13px; }
+body { font-size:15px; }
+}
+
+/* Small mobile adjustments */
+@media (max-width:420px){
+.logo { width:56px; height:56px; font-size:16px; }
+.org-name .title { font-size:16px; }
+.org-name .subtitle { font-size:12px; }
+.btn { padding:10px 12px; font-size:15px; }
+.form textarea { min-height:100px; }
+}
+
+/* Make sure no CSS transitions/animations exist */
+* { transition: none !important; animation: none !important; }
+</style>
+</head>
+<body>
+
+<div class="container" role="main">
+
+<!-- HEADER -->
+<header class="header" role="banner" aria-label="空間認知補正機構 ヘッダー">
+<div class="logo">SC•A</div>
+<div class="org-name">
+<div class="title">空間認知補正機構</div>
+<div class="subtitle">Spatial Cognition Adjustment Organization — 非公開観測</div>
+</div>
+
+<div class="header-meta" aria-hidden="true">
+<div>登録: <span style="font-weight:700">非公開</span></div>
+<div class="regnum">登録番号: —</div>
+<div style="margin-top:6px; font-size:12px;">所在地: 非公開</div>
+</div>
+</header>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- CONTENT (left) -->
+<section class="content" aria-labelledby="leadTitle">
+
+<h1 id="leadTitle" class="lead">この空間に違和感はありませんか？</h1>
+<div class="subtitle">
+私たちは「説明がつかない空間知覚」の記録と分類を行っています。以下は当機構による一般的な観察ポイントと注意喚起です。
+</div>
+
+<div class="notice" role="alert">
+<strong>注意：</strong>当ページの内容は観測記録の抜粋です。読み進めることで既視感・不安感が生じる可能性があります。閲覧は自己責任で行ってください。
+</div>
+
+<div class="h2">当機構の目的（曖昧な定義で）</div>
+<p>
+空間認知補正機構は、個人が経験する「場所のズレ」「用途不明空間の印象」「時間感覚の曖昧化」等の事例を収集し、分類することを目的としています。機構の活動は観測と整理が中心であり、施設の設置や調査訪問、立入等の斡旋を行うものではありません。
+</p>
+
+<div class="grid-2" aria-hidden="false">
+<div class="detail-card">
+<strong>観察例（典型）</strong>
+<ul style="margin:8px 0 0 18px; padding:0;">
+<li>白基調の内装で、用途が判別しにくい広い共用空間</li>
+<li>規則的に並ぶ部屋群が揃っているが、どれも使われているように見えない</li>
+<li>稼働音はあるが機能が確認できない機械類</li>
+<li>滞在時に時間経過の感覚が薄れる現象</li>
+</ul>
+</div>
+<div class="detail-card">
+<strong>報告の傾向</strong>
+<ul style="margin:8px 0 0 18px; padding:0;">
+<li>体験者は霊的要素を必ずしも主張しない</li>
+<li>描写は具体的だが現地確認が難しい</li>
+<li>類似事例が地域的に散発する場合がある</li>
+</ul>
+</div>
+</div>
+
+<div class="h2">最近の観測サマリ</div>
+<p>以下は公開可能な抜粋です。データは断片的で、完全性は保証されません。</p>
+
+<table class="report-table" role="table" aria-label="観測サマリ">
+<thead>
+<tr><th>日付</th><th>概要</th><th>注記</th></tr>
+</thead>
+<tbody>
+<tr><td>2025-11-12</td><td>白基調の共同室での既視感報告（複数）</td><td>調査継続</td></tr>
+<tr><td>2025-09-03</td><td>稼働音が聞こえるが機能不詳の機器群の報告</td><td>録音あり（非公開）</td></tr>
+<tr><td>2024-12-25</td><td>滞在時間の主観的短縮のケース</td><td>事例数少</td></tr>
+</tbody>
+</table>
+
+<div class="h2">よくある質問（FAQ）</div>
+<dl class="faq">
+<dt>Q1. ここに書かれている場所は実在しますか？</dt>
+<dd>A1. 一義的な答えはありません。報告は個人の主観を含むため、現地確認が取れないものが多く含まれます。</dd>
+
+<dt>Q2. この機構は訪問サービスを提供しますか？</dt>
+<dd>A2. いいえ。当機構は観測・記録・分類を行う団体（表明）であり、現地訪問や斡旋は行っていません。</dd>
+
+<dt>Q3. 実際に「戻れなくなる」事例はありますか？</dt>
+<dd>A3. 一部の報告には行方不明に結びつく記述が含まれますが、因果関係が確認できる公的証拠は提示されていません。</dd>
+
+<dt>Q4. 情報提供はできますか？</dt>
+<dd>A4. 本ページ下部の「情報提供フォーム」から要旨を送ることは可能です。<br>
+ただし、個別返信は原則行いません。提出された情報は当機構内での検討対象となり、公開されないことがあります。</dd>
+</dl>
+
+<div class="h2">情報提供（疑似フォーム）</div>
+<p>
+以下のフォームは<strong>外部送信を行わない</strong>ローカルな入力窓です。送信を押すとページ内で簡易的な確認メッセージを表示します（ここでの提出は実際の報告受付や調査依頼を意味するものではありません）。
+</p>
+
+<div class="form" aria-label="情報提供フォーム">
+<label for="name">投稿者名（任意）</label>
+<input id="name" type="text" placeholder="例：匿名希望">
+
+<label for="summary">要旨（必須）</label>
+<textarea id="summary" placeholder="できるだけ簡潔に、発生日時や場所の特徴を記載してください。"></textarea>
+
+<label for="detail">詳細（任意）</label>
+<textarea id="detail" placeholder="補足情報（聞き取りメモ、写真の有無など）"></textarea>
+
+<div class="form-actions">
+<button id="previewBtn" class="btn">内容確認</button>
+<button id="sendBtn" class="btn primary">送信（ページ内処理）</button>
+</div>
+
+<div id="formFeedback" class="footnote" aria-live="polite" style="display:none; margin-top:10px;"></div>
+</div>
+
+<div class="disclaimer">
+<strong>免責事項：</strong>当機構が公開する情報は観測記録の断片です。情報の完全性、有効性、正確性について当機構はいかなる保証もいたしません。提供された情報が原因で生じた損害について、当機構は一切の責任を負いません。登録情報・連絡先・所在地は管理上非公開としています。
+</div>
+
+</section>
+
+<!-- ASIDE (right) -->
+<aside class="aside" aria-label="補助情報">
+
+<div class="panel" role="complementary">
+<h4>当機構の立場（簡潔）</h4>
+<p>研究機関でも行政機関でもありません。観測の蓄積と形式化を目的とする任意の集まり（表明）です。外部からの寄稿・編集提案は限定的に受け付けています。</p>
+</div>
+
+<div class="panel" aria-hidden="false">
+<h4>注目の言説（抜粋）</h4>
+<p style="margin-top:10px;">
+「説明できない違和感を消費しないでください」— 我々は分析よりもまず記録することを優先しています。分析結果は公開されるとは限りません。
+</p>
+</div>
+
+<div class="panel" aria-hidden="false">
+<h4>非公開の問い合わせ</h4>
+<p>外部連絡は原則受け付けません。必要な場合は当機構の「受理窓口（非公開）」を通じてのみ対応します。窓口情報は公開していません。</p>
+</div>
+
+<div class="panel" aria-hidden="false">
+<h4>最近の内部メモ（抜粋）</h4>
+<p style="font-family:monospace; color:#444; margin-top:10px;">
+[2025-12-01] データベース更新：一部事例を分類Yへ移動。<br>
+[2025-10-10] 録音ファイル（非公開）追加。
+</p>
+</div>
+
+<div class="panel" aria-hidden="false">
+<h4>関連ページ</h4>
+<p style="margin-top:8px;">
+<a href="index.html" style="color:#0b2a50; text-decoration:none;">オカルト板まとめトップへ（参考）</a><br>
+<a href="mailto:info@example.invalid" style="color:#0b2a50; text-decoration:none;">お問い合わせ（メール）</a>
+</p>
+</div>
+
+</aside>
+
+</div> <!-- main -->
+
+<div class="footer" role="contentinfo">
+空間認知補正機構 — 観測／分類部門（非公開） • 本ページは広告枠として作成された案内です。内容はフィクションを含む場合があります。
+</div>
+
+</div> <!-- container -->
+
+<!-- Minimal JS: form handling (local only), no network calls, no animations -->
+<script>
+(function(){
+'use strict';
+
+var previewBtn = document.getElementById('previewBtn');
+var sendBtn = document.getElementById('sendBtn');
+var feedback = document.getElementById('formFeedback');
+
+function getFormData(){
+return {
+name: document.getElementById('name').value.trim(),
+summary: document.getElementById('summary').value.trim(),
+detail: document.getElementById('detail').value.trim()
+};
+}
+
+previewBtn.addEventListener('click', function(e){
+e.preventDefault();
+var d = getFormData();
+if(!d.summary){
+feedback.style.display = 'block';
+feedback.textContent = '要旨は必須です。簡潔に要旨を入力してください。';
+return;
+}
+feedback.style.display = 'block';
+feedback.textContent = '以下の内容で送信されます（ローカル表示のみ）\n' +
+'投稿者: ' + (d.name || '匿名') + '\n' +
+'要旨: ' + d.summary + '\n' +
+(d.detail ? ('詳細: ' + d.detail) : '');
+});
+
+sendBtn.addEventListener('click', function(e){
+e.preventDefault();
+var d = getFormData();
+if(!d.summary){
+feedback.style.display = 'block';
+feedback.textContent = '要旨は必須です。送信できません。';
+return;
+}
+// Simulate "processing" locally — no network
+feedback.style.display = 'block';
+feedback.textContent = '送信完了（擬似）。ご提供いただいた情報は当機構内部で検討される可能性があります。個別の返信は原則行いません。';
+// clear fields lightly
+document.getElementById('summary').value = '';
+document.getElementById('detail').value = '';
+document.getElementById('name').value = '';
+});
+
+// Accessibility: allow Ctrl+Enter to send
+document.getElementById('summary').addEventListener('keydown', function(e){
+if((e.ctrlKey || e.metaKey) && e.key === 'Enter'){
+sendBtn.click();
+}
+});
+
+// Protect against accidental external navigation: intercept mailto and warn (optional)
+var mailLinks = document.querySelectorAll('a[href^="mailto:"]');
+mailLinks.forEach(function(a){
+a.addEventListener('click', function(e){
+var ok = confirm('このメールリンクは外部アプリケーションを開きます。続行しますか？');
+if(!ok) e.preventDefault();
+});
+});
+
+// intentionally no analytics, no network calls, no transitions
+})();
+</script>
+
+</body>
+</html>
