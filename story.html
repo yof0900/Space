@@ -141,7 +141,6 @@ gap:12px;
 padding:12px 18px;
 border-bottom:1px dotted #e6eaf0;
 align-items:start;
-/* アニメーション無し（明示） */
 }
 .post .num {
 font-weight:900;
@@ -193,7 +192,6 @@ font-size:14px;
 
 /* ポスト操作（リンク等） */
 .post-actions { margin-top:8px; display:flex; gap:8px; align-items:center; font-size:13px; color:#666; }
-.copy-btn { padding:6px 8px; border-radius:6px; border:1px dashed #d6dbe8; background:transparent; cursor:pointer; font-size:13px; }
 
 /* ===== サイドバー ===== */
 .sidebar { position:sticky; top:18px; align-self:start; }
@@ -246,7 +244,7 @@ align-items:center;
 
 /* 小画面でボタンを大きめに */
 @media (max-width:520px) {
-.btn, .copy-btn { padding:10px 12px; font-size:15px; }
+.btn { padding:10px 12px; font-size:15px; }
 }
 </style>
 </head>
@@ -291,21 +289,20 @@ align-items:center;
 <div class="thread-meta">
 <span class="tag">怪談</span>
 <span>立て: 2013/06/12 01:14</span>
-<span>レス: 50</span>
+<span>表示: 50（Part1）</span>
 <span>最終: 2013/06/12 02:26</span>
 </div>
 </div>
 
 <div class="notice">
 本スレは過去ログの保存版です。内容の真偽は一切不明。閲覧により気分が悪くなった場合は直ちに中断してください。
-（空間認知補正機構による「非公開」タグが一部付与されています）
+（一部、空間認知補正のフラグが疑われる記述があります）
 </div>
 
 <div class="thread-bar">
 <div class="left">
 <button class="btn" id="toTop">先頭へ</button>
 <button class="btn" id="toBottom">最新へ</button>
-<button class="btn" id="copyAll">全レスのパーマリンク（まとめ）</button>
 </div>
 <div class="right">
 <div style="font-size:13px;color:#6b6f76">表示: <strong id="countVisible">50</strong> 件</div>
@@ -315,9 +312,9 @@ align-items:center;
 <!-- 投稿群 -->
 <div class="posts" id="posts">
 
-<!-- Post 1 -->
+<!-- Post 1 (OP: 長め・イッチ導入は概ね同じ) -->
 <article id="p1" class="post">
-<div class="num"><a href="#p1" class="linkish" onclick="copyPermalink(event,1)">1</a></div>
+<div class="num">1</div>
 <div>
 <div class="meta">
 <span class="name">本当にあった怖い名無し</span>
@@ -330,27 +327,22 @@ align-items:center;
 数年前、知り合いの知り合い経由で聞いた話なんだが、
 「The tragic space」って呼ばれてる場所の噂を知ってる奴いないか？
 
-地図に載らない施設で、外見は病室とか、美術館とかいろいろ言われてる。
-中に入ると、やたら広い共用スペースと、
-上下左右に部屋が配置されてるらしい。
+外見や呼ばれ方がバラバラで、病室っぽいって言う奴もいれば、
+美術館っぽい、不思議な展示室みたいだって話もある。
+共通点は「白い」「中央に広いホールがある」「上下左右に部屋が伸びる」ってことくらい。
 
-で、入った人間が「自分のことを考えすぎる」と
-戻ってこれなくなるとか。
+入った人が「ここに居ると、ずっと自分のことを考えてしまう」と言って、
+戻ってこれなくなったらしい。というか連絡が途絶えた。
 
-正直、作り話っぽいんだけど、
-妙に具体的で引っかかってるんで、情報求。
-</div>
-<div class="post-actions">
-<button class="copy-btn" onclick="copyPermalink(event,1)">パーマリンクをコピー</button>
-<a class="linkish" href="#p1">リンク</a>
-<span style="margin-left:auto;color:#999;font-size:13px">No.1</span>
+正直、夢の話かもしれない。だけど話の細部が妙に一致してて引っかかる。
+誰か同じような話聞いたことない？
 </div>
 </div>
 </article>
 
 <!-- Post 2 -->
 <article id="p2" class="post">
-<div class="num"><a href="#p2" class="linkish" onclick="copyPermalink(event,2)">2</a></div>
+<div class="num">2</div>
 <div>
 <div class="meta">
 <span class="name">本当にあった怖い名無し</span>
@@ -358,532 +350,1022 @@ align-items:center;
 <span class="id">ID:Yt7kM2eP0</span>
 </div>
 <div class="body">
-&gt;&gt;1
-オカ板のテンプレみたいで草
-</div>
-<div class="post-actions">
-<button class="copy-btn" onclick="copyPermalink(event,2)">パーマリンクをコピー</button>
+>>1
+オカ板のテンプレっぽくて吹いた
 </div>
 </div>
 </article>
 
-<!-- 以下、p3〜p50 を同じ形式で出力（内容はユーザー提供のまま） -->
-<!-- For brevity here, the remaining posts are included below exactly as provided. -->
-
+<!-- Post 3 -->
 <article id="p3" class="post">
-<div class="num"><a href="#p3" class="linkish" onclick="copyPermalink(event,3)">3</a></div>
+<div class="num">3</div>
 <div>
-<div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:17:41</span> <span class="id">ID:3FvLxk9E0</span></div>
-<div class="body">聞いたことはない
-でも「白い施設」系の話は定期的に湧くよな</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,3)">パーマリンクをコピー</button></div>
+<div class="meta">
+<span class="name">本当にあった怖い名無し</span>
+<span class="date">2013/06/12(水) 01:17:41</span>
+<span class="id">ID:3FvLxk9E0</span>
+</div>
+<div class="body">
+意外と「白い」系って定期的に出るよな。
+病室っていう表現、個人的にグッと来るわ。
+</div>
 </div>
 </article>
 
+<!-- Post 4 -->
 <article id="p4" class="post">
-<div class="num"><a href="#p4" class="linkish" onclick="copyPermalink(event,4)">4</a></div>
+<div class="num">4</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:18:55</span> <span class="id">ID:9Msd82Qa0</span></div>
-<div class="body">どうせ夢か統失案件</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,4)">パーマリンクをコピー</button></div>
+<div class="body">どうせ夢オチだろ。既出。</div>
 </div>
 </article>
 
+<!-- Post 5 -->
 <article id="p5" class="post">
-<div class="num"><a href="#p5" class="linkish" onclick="copyPermalink(event,5)">5</a></div>
+<div class="num">5</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:20:10</span> <span class="id">ID:Qp9aLx3K0</span></div>
-<div class="body">&gt;&gt;2
-&gt;&gt;4
-まあそう言われると思った。
-
-ただ、その知り合い、
-その施設の間取りをやたら正確に描いてたんだよ。
-中央にホールみたいなのがあって、
-その周囲を囲むように部屋があるって。</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,5)">パーマリンクをコピー</button></div>
+<div class="body">
+>>2
+>>4
+まあそう言われるだろうけど、聞いたやつは活字で間取りを描けるレベルで正確だったんだ。
+中央ホール、上側に細長い回廊、下側に貯水のようなスペースがあるって。
+運営も無い、住所も特定できないって言ってた。
+</div>
 </div>
 </article>
 
+<!-- Post 6 -->
 <article id="p6" class="post">
-<div class="num"><a href="#p6" class="linkish" onclick="copyPermalink(event,6)">6</a></div>
+<div class="num">6</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:22:31</span> <span class="id">ID:K82HcLx20</span></div>
-<div class="body">設計士か何かじゃね？</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,6)">パーマリンクをコピー</button></div>
+<div class="body">設計士が夢見たんじゃねーの（雑）</div>
 </div>
 </article>
 
+<!-- Post 7 -->
 <article id="p7" class="post">
-<div class="num"><a href="#p7" class="linkish" onclick="copyPermalink(event,7)">7</a></div>
+<div class="num">7</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:23:12</span> <span class="id">ID:aaP0Rk3D0</span></div>
-<div class="body">なんか既視感あるんだよな
-夢で似た場所行ったことある気がする</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,7)">パーマリンクをコピー</button></div>
+<div class="body">
+なんか既視感あるんだよなあ。俺も夢で似た場所行ったことある気がする。
+で、目の前に誰か居て、何も言わずに去っていった記憶だけ残る。
+</div>
 </div>
 </article>
 
+<!-- Post 8 -->
 <article id="p8" class="post">
-<div class="num"><a href="#p8" class="linkish" onclick="copyPermalink(event,8)">8</a></div>
+<div class="num">8</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:25:09</span> <span class="id">ID:Lm0E7d8Q0</span></div>
-<div class="body">&gt;&gt;7
-集合的無意識乙</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,8)">パーマリンクをコピー</button></div>
+<div class="body">&gt;&gt;7 集合的無意識乙</div>
 </div>
 </article>
 
+<!-- Post 9 -->
 <article id="p9" class="post">
-<div class="num"><a href="#p9" class="linkish" onclick="copyPermalink(event,9)">9</a></div>
+<div class="num">9</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:27:40</span> <span class="id">ID:Qp9aLx3K0</span></div>
-<div class="body">あと、その施設、
-「機械が壊れてる部屋」があるらしい。
-使えないのに、ずっと動いてる音がするって。</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,9)">パーマリンクをコピー</button></div>
+<div class="body">
+補足。
+その知り合いは「使えない機械が作動してる部屋」の話をしてた。
+音はするのに操作できない、触るとサビ粉のような黒い粉が付くと。
+（※これは後から混ざった噂かもしれない）
+</div>
 </div>
 </article>
 
+<!-- Post 10 -->
 <article id="p10" class="post">
-<div class="num"><a href="#p10" class="linkish" onclick="copyPermalink(event,10)">10</a></div>
+<div class="num">10</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:28:55</span> <span class="id">ID:ZxK9p2M10</span></div>
-<div class="body">一気に胡散臭くなってきたな</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,10)">パーマリンクをコピー</button></div>
+<div class="body">一気に胡散臭くなったわ</div>
 </div>
 </article>
 
+<!-- Post 11 -->
 <article id="p11" class="post">
-<div class="num"><a href="#p11" class="linkish" onclick="copyPermalink(event,11)">11</a></div>
+<div class="num">11</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:30:11</span> <span class="id">ID:bE3K7d9Q0</span></div>
-<div class="body">動いてるのに使えない機械って地味に怖いな
-back roomっぽい</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,11)">パーマリンクをコピー</button></div>
+<div class="body">動いてるのに使えない機械って地味にゾッとする。back room系の空気ある。</div>
 </div>
 </article>
 
+<!-- Post 12 -->
 <article id="p12" class="post">
-<div class="num"><a href="#p12" class="linkish" onclick="copyPermalink(event,12)">12</a></div>
+<div class="num">12</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:31:40</span> <span class="id">ID:Xk92L0Qa0</span></div>
-<div class="body">&gt;&gt;1
-その知り合い今どうしてる？</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,12)">パーマリンクをコピー</button></div>
+<div class="body">&gt;&gt;1 その知り合い今どうしてるの？</div>
 </div>
 </article>
 
+<!-- Post 13 -->
 <article id="p13" class="post">
-<div class="num"><a href="#p13" class="linkish" onclick="copyPermalink(event,13)">13</a></div>
+<div class="num">13</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:33:02</span> <span class="id">ID:Qp9aLx3K0</span></div>
-<div class="body">&gt;&gt;12
-連絡取れなくなった。
-SNSも更新止まってる。</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,13)">パーマリンクをコピー</button></div>
+<div class="body">
+>>12
+連絡取れなくなった。SNSも更新が止まってる。
+「ここに居ると眠りたくなる」みたいなことを最後に言ってた、とだけ聞いた。
+（本人からの直接の発言ではなく、聞き伝えなので正確性は保証しない）
+</div>
 </div>
 </article>
 
+<!-- Post 14 -->
 <article id="p14" class="post">
-<div class="num"><a href="#p14" class="linkish" onclick="copyPermalink(event,14)">14</a></div>
+<div class="num">14</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:34:21</span> <span class="id">ID:Wc2P9LxQ0</span></div>
 <div class="body">はい解散</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,14)">パーマリンクをコピー</button></div>
 </div>
 </article>
 
+<!-- Post 15 -->
 <article id="p15" class="post">
-<div class="num"><a href="#p15" class="linkish" onclick="copyPermalink(event,15)">15</a></div>
+<div class="num">15</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:36:48</span> <span class="id">ID:Kq91ZxL00</span></div>
-<div class="body">でもこういう「消えた」系は
-後からガチっぽくなるから油断できん</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,15)">パーマリンクをコピー</button></div>
+<div class="body">
+でも「消えた」系って、最初は嘲笑されるけど
+時間経つとだんだん本気で語られるパターン多いぞ。
+だから油断できない。
+</div>
 </div>
 </article>
 
+<!-- Post 16 (ignored short "今北") -->
 <article id="p16" class="post ignored">
-<div class="num"><a href="#p16" class="linkish" onclick="copyPermalink(event,16)">16</a></div>
+<div class="num">16</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:38:11</span> <span class="id">ID:Ue90LpQ10</span></div>
 <div class="body">今北産業</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,16)">パーマリンクをコピー</button></div>
 </div>
 </article>
 
+<!-- Post 17 -->
 <article id="p17" class="post">
-<div class="num"><a href="#p17" class="linkish" onclick="copyPermalink(event,17)">17</a></div>
+<div class="num">17</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:39:00</span> <span class="id">ID:aP9Lx3K0</span></div>
-<div class="body">&gt;&gt;16
+<div class="body">
+>>16
 知らん
-白い建物
-怖い</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,17)">パーマリンクをコピー</button></div>
+白い建物、怖い
+</div>
 </div>
 </article>
 
+<!-- Post 18 -->
 <article id="p18" class="post">
-<div class="num"><a href="#p18" class="linkish" onclick="copyPermalink(event,18)">18</a></div>
+<div class="num">18</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:41:12</span> <span class="id">ID:2Lm9QKx0</span></div>
-<div class="body">「The tragic space」って英語名が逆に怖い
-誰が付けたんだよ</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,18)">パーマリンクをコピー</button></div>
+<div class="body">The tragic spaceって英語名が逆に不気味。誰が例の呼び名を広めたんだろ。</div>
 </div>
 </article>
 
+<!-- Post 19 -->
 <article id="p19" class="post">
-<div class="num"><a href="#p19" class="linkish" onclick="copyPermalink(event,19)">19</a></div>
+<div class="num">19</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:42:56</span> <span class="id">ID:Qp9aLx3K0</span></div>
-<div class="body">&gt;&gt;18
-それも不明。
-知り合いは「そう呼ばれてる」って言ってた。</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,19)">パーマリンクをコピー</button></div>
+<div class="body">名前の出処は不明。知り合いが「そう呼ばれてた」とだけ言ってた。</div>
 </div>
 </article>
 
+<!-- Post 20 -->
 <article id="p20" class="post">
-<div class="num"><a href="#p20" class="linkish" onclick="copyPermalink(event,20)">20</a></div>
+<div class="num">20</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:44:10</span> <span class="id">ID:O92Lx9K0</span></div>
-<div class="body">このスレ保存しとくわ</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,20)">パーマリンクをコピー</button></div>
+<div class="body">このスレ保存しとくわ。後で読み返したい。</div>
 </div>
 </article>
 
-<!-- Posts 21-50 are included above in full in the previous message and are reproduced here as provided by you -->
-<!-- For brevity we include the rest exactly as given in the user's original content (p21-p50) -->
-<!-- p21 -->
+<!-- Post 21 -->
 <article id="p21" class="post">
-<div class="num"><a href="#p21" class="linkish" onclick="copyPermalink(event,21)">21</a></div>
+<div class="num">21</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:45:02</span> <span class="id">ID:rP0kL2M90</span></div>
-<div class="body">英語名なのが逆に日本発祥っぽくない？
-誰かが後付けで翻訳した感</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,21)">パーマリンクをコピー</button></div>
+<div class="body">英語名っぽいけど日本起源の可能性あるよな。後付けで翻訳された例は多い。</div>
 </div>
 </article>
 
-<!-- p22 -->
+<!-- Post 22 -->
 <article id="p22" class="post">
-<div class="num"><a href="#p22" class="linkish" onclick="copyPermalink(event,22)">22</a></div>
+<div class="num">22</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:46:18</span> <span class="id">ID:8LmQw2P00</span></div>
-<div class="body">&gt;&gt;21
-それ
-「トラジックスペース」って音だけ先にあったんじゃね</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,22)">パーマリンクをコピー</button></div>
+<div class="body">&gt;&gt;21 そういう「音だけ先に出る」パターンあるね。</div>
 </div>
 </article>
 
-<!-- p23 -->
+<!-- Post 23 -->
 <article id="p23" class="post">
-<div class="num"><a href="#p23" class="linkish" onclick="copyPermalink(event,23)">23</a></div>
+<div class="num">23</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:47:55</span> <span class="id">ID:U9PqLx120</span></div>
-<div class="body">昔VIPで似たスレ見た記憶ある
-内容は全然覚えてないけど</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,23)">パーマリンクをコピー</button></div>
+<div class="body">昔VIPに似たスレあった気がするけど、断片しか覚えてない。</div>
 </div>
 </article>
 
-<!-- p24 ignored -->
+<!-- Post 24 (ignored short "腹減った") -->
 <article id="p24" class="post ignored">
-<div class="num"><a href="#p24" class="linkish" onclick="copyPermalink(event,24)">24</a></div>
+<div class="num">24</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:49:03</span> <span class="id">ID:aaL0kQe20</span></div>
 <div class="body">腹減った</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,24)">パーマリンクをコピー</button></div>
 </div>
 </article>
 
-<!-- p25 -->
+<!-- Post 25 -->
 <article id="p25" class="post">
-<div class="num"><a href="#p25" class="linkish" onclick="copyPermalink(event,25)">25</a></div>
+<div class="num">25</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:50:41</span> <span class="id">ID:Qp9aLx3K0</span></div>
-<div class="body">&gt;&gt;21
-翻訳というか、
-そういう意味だってだけかもしれないぞ。
-正式名称じゃないとか。</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,25)">パーマリンクをコピー</button></div>
+<div class="body">翻訳だか通称だか分からんが、名称が付くと拡散しやすいってのは確かにある。</div>
 </div>
 </article>
 
-<!-- p26 -->
+<!-- Post 26 -->
 <article id="p26" class="post">
-<div class="num"><a href="#p26" class="linkish" onclick="copyPermalink(event,26)">26</a></div>
+<div class="num">26</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:52:09</span> <span class="id">ID:K8Lq90P20</span></div>
-<div class="body">悲劇的空間ｗｗｗ
-中二病ネーミングで草</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,26)">パーマリンクをコピー</button></div>
+<div class="body">悲劇的空間ｗｗｗ 中二病ネーミングで草</div>
 </div>
 </article>
 
-<!-- p27 -->
+<!-- Post 27 -->
 <article id="p27" class="post">
-<div class="num"><a href="#p27" class="linkish" onclick="copyPermalink(event,27)">27</a></div>
+<div class="num">27</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:53:27</span> <span class="id">ID:WQ2L9xK0</span></div>
-<div class="body">&gt;&gt;26
-笑ってるけど
-そう呼ばれてるだけ系は
-あとから効いてくるパターンだな</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,27)">パーマリンクをコピー</button></div>
+<div class="body">笑ってるやつ、後から効いてくるタイプだから黙っとけ。</div>
 </div>
 </article>
 
-<!-- p28 -->
+<!-- Post 28 -->
 <article id="p28" class="post">
-<div class="num"><a href="#p28" class="linkish" onclick="copyPermalink(event,28)">28</a></div>
+<div class="num">28</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:54:58</span> <span class="id">ID:0PqLxZ900</span></div>
-<div class="body">オカ板民あるある
-"最初だけ"馬鹿にする</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,28)">パーマリンクをコピー</button></div>
+<div class="body">オカ板民あるある：「最初だけ笑う」→「後でビビる」</div>
 </div>
 </article>
 
-<!-- p29 -->
+<!-- Post 29 -->
 <article id="p29" class="post">
-<div class="num"><a href="#p29" class="linkish" onclick="copyPermalink(event,29)">29</a></div>
+<div class="num">29</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:56:31</span> <span class="id">ID:J9KqLxA20</span></div>
-<div class="body">病室っぽいってのが嫌だな
-人の痕跡がある場所の怪談は怖い</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,29)">パーマリンクをコピー</button></div>
+<div class="body">病室っぽい＝人の痕跡が残る、ってのは嫌だよな。余計にリアルになる。</div>
 </div>
 </article>
 
-<!-- p30 -->
+<!-- Post 30 -->
 <article id="p30" class="post">
-<div class="num"><a href="#p30" class="linkish" onclick="copyPermalink(event,30)">30</a></div>
+<div class="num">30</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:57:49</span> <span class="id">ID:UQ9P3Lx0</span></div>
-<div class="body">「住んでる人がいるのか分からない」
-ってやつだろどうせ</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,30)">パーマリンクをコピー</button></div>
+<div class="body">「住んでるのか分からない」って表現の怪談は一番頭に残る。</div>
 </div>
 </article>
 
-<!-- p31 -->
+<!-- Post 31 -->
 <article id="p31" class="post">
-<div class="num"><a href="#p31" class="linkish" onclick="copyPermalink(event,31)">31</a></div>
+<div class="num">31</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 01:59:10</span> <span class="id">ID:ZLx9Pq200</span></div>
-<div class="body">&gt;&gt;1
-その知り合い、何歳くらい？</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,31)">パーマリンクをコピー</button></div>
+<div class="body">&gt;&gt;1 その知り合い、何歳くらい？</div>
 </div>
 </article>
 
-<!-- p32 -->
+<!-- Post 32 -->
 <article id="p32" class="post">
-<div class="num"><a href="#p32" class="linkish" onclick="copyPermalink(event,32)">32</a></div>
+<div class="num">32</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:00:41</span> <span class="id">ID:Qp9aLx3K0</span></div>
-<div class="body">&gt;&gt;31
-20代後半。
-オカルト好きではなかった。</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,32)">パーマリンクをコピー</button></div>
+<div class="body">>>31 20代後半。オカルト好きではなかったそうだ。</div>
 </div>
 </article>
 
-<!-- p33 -->
+<!-- Post 33 -->
 <article id="p33" class="post">
-<div class="num"><a href="#p33" class="linkish" onclick="copyPermalink(event,33)">33</a></div>
+<div class="num">33</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:02:18</span> <span class="id">ID:LQ0Px9820</span></div>
-<div class="body">オカ好きじゃない人が語る怪談は
-逆に怖い</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,33)">パーマリンクをコピー</button></div>
+<div class="body">オカ好きじゃない人が語る怪談は逆に説得力あるから怖い。</div>
 </div>
 </article>
 
-<!-- p34 ignored -->
+<!-- Post 34 (ignored "関係ないけど") -->
 <article id="p34" class="post ignored">
-<div class="num"><a href="#p34" class="linkish" onclick="copyPermalink(event,34)">34</a></div>
+<div class="num">34</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:03:57</span> <span class="id">ID:aaP9LQx0</span></div>
 <div class="body">関係ないけどこの時間帯のオカ板すき</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,34)">パーマリンクをコピー</button></div>
 </div>
 </article>
 
-<!-- p35 -->
+<!-- Post 35 -->
 <article id="p35" class="post">
-<div class="num"><a href="#p35" class="linkish" onclick="copyPermalink(event,35)">35</a></div>
+<div class="num">35</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:05:22</span> <span class="id">ID:KQ8LxP000</span></div>
-<div class="body">&gt;&gt;34
-わかる</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,35)">パーマリンクをコピー</button></div>
+<div class="body">&gt;&gt;34 わかる</div>
 </div>
 </article>
 
-<!-- p36 -->
+<!-- Post 36 -->
 <article id="p36" class="post">
-<div class="num"><a href="#p36" class="linkish" onclick="copyPermalink(event,36)">36</a></div>
+<div class="num">36</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:06:59</span> <span class="id">ID:2PxLQ90a</span></div>
-<div class="body">でもこのスレ
-地味に嫌な感じする</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,36)">パーマリンクをコピー</button></div>
+<div class="body">このスレ地味に嫌な感じするわ。何か足りないんだよな。</div>
 </div>
 </article>
 
-<!-- p37 -->
+<!-- Post 37 -->
 <article id="p37" class="post">
-<div class="num"><a href="#p37" class="linkish" onclick="copyPermalink(event,37)">37</a></div>
+<div class="num">37</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:08:21</span> <span class="id">ID:WQxL90P0</span></div>
-<div class="body">嫌な感じっていうか
-説明できない違和感</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,37)">パーマリンクをコピー</button></div>
+<div class="body">説明出来ない違和感ってやつ。言葉にできない。</div>
 </div>
 </article>
 
-<!-- p38 -->
+<!-- Post 38 -->
 <article id="p38" class="post">
-<div class="num"><a href="#p38" class="linkish" onclick="copyPermalink(event,38)">38</a></div>
+<div class="num">38</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:09:50</span> <span class="id">ID:LxP09Q20</span></div>
-<div class="body">こういうのが一番長引く</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,38)">パーマリンクをコピー</button></div>
+<div class="body">こういうスレは長引くとだんだん本性出てくるから怖い。</div>
 </div>
 </article>
 
-<!-- p39 ignored -->
+<!-- Post 39 (ignored "眠い") -->
 <article id="p39" class="post ignored">
-<div class="num"><a href="#p39" class="linkish" onclick="copyPermalink(event,39)">39</a></div>
+<div class="num">39</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:11:07</span> <span class="id">ID:9PQLx200</span></div>
 <div class="body">眠い</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,39)">パーマリンクをコピー</button></div>
 </div>
 </article>
 
-<!-- p40 -->
+<!-- Post 40 -->
 <article id="p40" class="post">
-<div class="num"><a href="#p40" class="linkish" onclick="copyPermalink(event,40)">40</a></div>
+<div class="num">40</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:12:41</span> <span class="id">ID:KPx90LQ0</span></div>
-<div class="body">&gt;&gt;39
-寝ろ</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,40)">パーマリンクをコピー</button></div>
+<div class="body">&gt;&gt;39 寝ろ</div>
 </div>
 </article>
 
-<!-- p41 -->
+<!-- Post 41 -->
 <article id="p41" class="post">
-<div class="num"><a href="#p41" class="linkish" onclick="copyPermalink(event,41)">41</a></div>
+<div class="num">41</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:14:18</span> <span class="id">ID:UQ9Lx000</span></div>
-<div class="body">このままdat落ちしそう</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,41)">パーマリンクをコピー</button></div>
+<div class="body">このままdat落ちするんだろうなって雰囲気がある</div>
 </div>
 </article>
 
-<!-- p42 -->
+<!-- Post 42 -->
 <article id="p42" class="post">
-<div class="num"><a href="#p42" class="linkish" onclick="copyPermalink(event,42)">42</a></div>
+<div class="num">42</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:15:59</span> <span class="id">ID:LQx9P0K0</span></div>
-<div class="body">&gt;&gt;41
-それが一番怖い</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,42)">パーマリンクをコピー</button></div>
+<div class="body">&gt;&gt;41 それが一番怖い</div>
 </div>
 </article>
 
-<!-- p43 -->
+<!-- Post 43 -->
 <article id="p43" class="post">
-<div class="num"><a href="#p43" class="linkish" onclick="copyPermalink(event,43)">43</a></div>
+<div class="num">43</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:17:26</span> <span class="id">ID:aaQxLP000</span></div>
-<div class="body">なんかレス減ってきてない？</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,43)">パーマリンクをコピー</button></div>
+<div class="body">なんかレス減ってきた？</div>
 </div>
 </article>
 
-<!-- p44 -->
+<!-- Post 44 -->
 <article id="p44" class="post">
-<div class="num"><a href="#p44" class="linkish" onclick="copyPermalink(event,44)">44</a></div>
+<div class="num">44</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:18:57</span> <span class="id">ID:PxLQ0090</span></div>
-<div class="body">元からこんなもん</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,44)">パーマリンクをコピー</button></div>
+<div class="body">元からこんなもんだよ</div>
 </div>
 </article>
 
-<!-- p45 -->
+<!-- Post 45 -->
 <article id="p45" class="post">
-<div class="num"><a href="#p45" class="linkish" onclick="copyPermalink(event,45)">45</a></div>
+<div class="num">45</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:20:31</span> <span class="id">ID:ZQ9LxP00</span></div>
-<div class="body">オカ板は最初だけだからな</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,45)">パーマリンクをコピー</button></div>
+<div class="body">オカ板は最初だけ勢いある</div>
 </div>
 </article>
 
-<!-- p46 -->
+<!-- Post 46 -->
 <article id="p46" class="post">
-<div class="num"><a href="#p46" class="linkish" onclick="copyPermalink(event,46)">46</a></div>
+<div class="num">46</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:22:02</span> <span class="id">ID:Qp9aLx3K0</span></div>
-<div class="body">今日はこの辺で。
-また何か思い出したら書く。</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,46)">パーマリンクをコピー</button></div>
+<div class="body">今日はこの辺で。また何か思い出したら書く。</div>
 </div>
 </article>
 
-<!-- p47 -->
+<!-- Post 47 -->
 <article id="p47" class="post">
-<div class="num"><a href="#p47" class="linkish" onclick="copyPermalink(event,47)">47</a></div>
+<div class="num">47</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:22:58</span> <span class="id">ID:LxPQ9000</span></div>
 <div class="body">乙</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,47)">パーマリンクをコピー</button></div>
 </div>
 </article>
 
-<!-- p48 -->
+<!-- Post 48 -->
 <article id="p48" class="post">
-<div class="num"><a href="#p48" class="linkish" onclick="copyPermalink(event,48)">48</a></div>
+<div class="num">48</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:23:41</span> <span class="id">ID:PQxL9000</span></div>
 <div class="body">続きあるなら保守</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,48)">パーマリンクをコピー</button></div>
 </div>
 </article>
 
-<!-- p49 ignored -->
+<!-- Post 49 (ignored "風呂入る") -->
 <article id="p49" class="post ignored">
-<div class="num"><a href="#p49" class="linkish" onclick="copyPermalink(event,49)">49</a></div>
+<div class="num">49</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:24:59</span> <span class="id">ID:9LxPQ000</span></div>
 <div class="body">風呂入ってくる</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,49)">パーマリンクをコピー</button></div>
 </div>
 </article>
 
-<!-- p50 -->
+<!-- Post 50 -->
 <article id="p50" class="post">
-<div class="num"><a href="#p50" class="linkish" onclick="copyPermalink(event,50)">50</a></div>
+<div class="num">50</div>
 <div>
 <div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:26:10</span> <span class="id">ID:LQPx9000</span></div>
-<div class="body">このスレ変に頭に残るな</div>
-<div class="post-actions"><button class="copy-btn" onclick="copyPermalink(event,50)">パーマリンクをコピー</button></div>
+<div class="body">このスレ変に頭に残るな。寝る。</div>
+</div>
+</article>
+
+<!-- 51 -->
+<article id="p51" class="post">
+<div class="num">51</div>
+<div>
+<div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:27:05</span> <span class="id">ID:VxP0qL11</span></div>
+<div class="body">
+>>1 の話、続き書いてくれよ。
+あの「貯水っぽいスペース」っての、地味にイヤだわ。
+水がある怪談はリアルだもんな。
+</div>
+</div>
+</article>
+
+<!-- 52 -->
+<article id="p52" class="post">
+<div class="num">52</div>
+<div>
+<div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:28:23</span> <span class="id">ID:Tr9Lx002</span></div>
+<div class="body">あれって「展示作品」みたいに置かれてるって聞いたけど本当？</div>
+</div>
+</article>
+
+<!-- 53 long multi-line -->
+<article id="p53" class="post">
+<div class="num">53</div>
+<div>
+<div class="meta"><span class="name">観測者ヲ名乗ル者</span> <span class="date">2013/06/12(水) 02:30:41</span> <span class="id">ID:Obs3rV</span></div>
+<div class="body">
+※聞いた話をそのまま書く。本人確認などはしていない。
+
+ある人（B）がそこに「行ってみた」と言って、
+白い大きなホールの中央で、目の前に紙の風船のようなものが浮いていたと。
+Bはそれを触ろうとしたが、指先だけがしびれるような感覚になって手を引っ込めたという。
+
+その後、Bは寝付きが悪くなり、夢の中でそのホールに戻されるようになった、と聞いた。
+（夢で繰り返される、という報告は他にもある）
+</div>
+</div>
+</article>
+
+<!-- 54 AA -->
+<article id="p54" class="post">
+<div class="num">54</div>
+<div>
+<div class="meta"><span class="name">名無しのAA職人</span> <span class="date">2013/06/12(水) 02:31:20</span> <span class="id">ID:AA_mkr</span></div>
+<div class="body">
+(　ﾟдﾟ)
+(　　つ━☆・*。
+　⊂彡
+ｒ┬┴┬┴
+</div>
+</div>
+</article>
+
+<!-- 55 short -->
+<article id="p55" class="post">
+<div class="num">55</div>
+<div>
+<div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:31:59</span> <span class="id">ID:Uq2Lx990</span></div>
+<div class="body">夢ならセーフ理論はよくわからん</div>
+</div>
+</article>
+
+<!-- 56 misinfo -->
+<article id="p56" class="post">
+<div class="num">56</div>
+<div>
+<div class="meta"><span class="name">最近ネットを見すぎな名無し</span> <span class="date">2013/06/12(水) 02:32:40</span> <span class="id">ID:NetL0st</span></div>
+<div class="body">どっかの都市伝説まとめで「東京の廃病院が元ネタ」って書いてあったが、調べてもそんな施設は無いらしい。</div>
+</div>
+</article>
+
+<!-- 57 anecdote -->
+<article id="p57" class="post">
+<div class="num">57</div>
+<div>
+<div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:34:05</span> <span class="id">ID:ZooP09</span></div>
+<div class="body">
+俺の友達（C）が「白い部屋で時計だけが止まってた」と言ってたな。
+あとで聞いたらCは当時、かなりストレス抱えてたみたいだ。
+心理状態が幻覚を作るって可能性も否定できない。
+</div>
+</div>
+</article>
+
+<!-- 58 snarky -->
+<article id="p58" class="post">
+<div class="num">58</div>
+<div>
+<div class="meta"><span class="name">現実派</span> <span class="date">2013/06/12(水) 02:34:49</span> <span class="id">ID:Real1st</span></div>
+<div class="body">そんな話、誰が信じるんだよ...（信じる人がここにいる。）</div>
+</div>
+</article>
+
+<!-- 59 multi reply -->
+<article id="p59" class="post">
+<div class="num">59</div>
+<div>
+<div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:35:32</span> <span class="id">ID:Gh9Lx002</span></div>
+<div class="body">
+>>53
+その「風船」って表現、どこかで見たなと思ったら
+古い夢日記サイトに似た描写があったわ。
+偶然か影響かは分からんが、尾ひれが付くパターンだろう。
+</div>
+</div>
+</article>
+
+<!-- 60 one-liner -->
+<article id="p60" class="post">
+<div class="num">60</div>
+<div>
+<div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:36:11</span> <span class="id">ID:YnP09x0</span></div>
+<div class="body">風船触るな（戒め）</div>
+</div>
+</article>
+
+<!-- 61 rumor -->
+<article id="p61" class="post">
+<div class="num">61</div>
+<div>
+<div class="meta"><span class="name">古参の情報屋</span> <span class="date">2013/06/12(水) 02:37:20</span> <span class="id">ID:InfoOld</span></div>
+<div class="body">
+補足：昔の掲示板で「天井のオブジェクトが順に変化する」と書かれていたログを見たことがある（ただし誰かが後で追記した可能性大）。
+そういう「段階的に進行する」って話は、後で事件性を匂わせやすい。
+</div>
+</div>
+</article>
+
+<!-- 62 jokey -->
+<article id="p62" class="post">
+<div class="num">62</div>
+<div>
+<div class="meta"><span class="name">煽り厨</span> <span class="date">2013/06/12(水) 02:38:00</span> <span class="id">ID:TrollX</span></div>
+<div class="body">>>61 またお前かｗｗｗ</div>
+</div>
+</article>
+
+<!-- 63 thoughtful -->
+<article id="p63" class="post">
+<div class="num">63</div>
+<div>
+<div class="meta"><span class="name">考察好き</span> <span class="date">2013/06/12(水) 02:39:41</span> <span class="id">ID:Thinker9</span></div>
+<div class="body">
+噂が増える理由は簡単で、人は「説明できない経験」を言語化したがる。
+そして言語化が繰り返されると、物語が強化される。
+だから同じ言い回しが出回るんだと思う。
+</div>
+</div>
+</article>
+
+<!-- 64 ignored -->
+<article id="p64" class="post ignored">
+<div class="num">64</div>
+<div>
+<div class="meta"><span class="name">名無し</span> <span class="date">2013/06/12(水) 02:40:02</span> <span class="id">ID:Meh</span></div>
+<div class="body">ggrks</div>
+</div>
+</article>
+
+<!-- 65 small anecdote -->
+<article id="p65" class="post">
+<div class="num">65</div>
+<div>
+<div class="meta"><span class="name">昔話好き</span> <span class="date">2013/06/12(水) 02:41:19</span> <span class="id">ID:StoryL</span></div>
+<div class="body">
+俺の婆ちゃんが「昔、白い大きな建物で奇妙な儀式があった」とだけ言ってた。
+場所は不明だが、人の記憶って変な形で残るよな。
+</div>
+</div>
+</article>
+
+<!-- 66 meta -->
+<article id="p66" class="post">
+<div class="num">66</div>
+<div>
+<div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:42:03</span> <span class="id">ID:Qp9aLx3K0</span></div>
+<div class="body">レスまとめると：</div>
+<div class="quote">
+・白い大ホール、上下左右の部屋<br>
+・貯水っぽいスペース（湿気、音）<br>
+・動いてるのに使えない機械（黒い粉が付く、という噂あり）<br>
+・一部の人が夢で繰り返し見る／行方不明報告あり
+</div>
+</div>
+</article>
+
+<!-- 67 skeptic -->
+<article id="p67" class="post">
+<div class="num">67</div>
+<div>
+<div class="meta"><span class="name">懐疑派</span> <span class="date">2013/06/12(水) 02:43:58</span> <span class="id">ID:Skept1c</span></div>
+<div class="body">全部記憶の補強による創作だろ。人間はパターンを見つける生き物だ。</div>
+</div>
+</article>
+
+<!-- 68 odd post -->
+<article id="p68" class="post">
+<div class="num">68</div>
+<div>
+<div class="meta"><span class="name">意味不明</span> <span class="date">2013/06/12(水) 02:45:00</span> <span class="id">ID:Wut</span></div>
+<div class="body">あのホールで歌ったら反応あったよ（錯乱）</div>
+</div>
+</article>
+
+<!-- 69 replies -->
+<article id="p69" class="post">
+<div class="num">69</div>
+<div>
+<div class="meta"><span class="name">優しい名無しさん</span> <span class="date">2013/06/12(水) 02:46:12</span> <span class="id">ID:KindL</span></div>
+<div class="body">
+>>68
+それ心地良さ求める脳の反応かもね。
+でもホラー演出としてはアリ。
+</div>
+</div>
+</article>
+
+<!-- 70 jokey -->
+<article id="p70" class="post">
+<div class="num">70</div>
+<div>
+<div class="meta"><span class="name">荒らし</span> <span class="date">2013/06/12(水) 02:47:00</span> <span class="id">ID:Salt</span></div>
+<div class="body">>>1 は創作乙 以上</div>
+</div>
+</article>
+
+<!-- 71 detailed rumor -->
+<article id="p71" class="post">
+<div class="num">71</div>
+<div>
+<div class="meta"><span class="name">匿名の聞き手</span> <span class="date">2013/06/12(水) 02:48:42</span> <span class="id">ID:HeardIt</span></div>
+<div class="body">
+小耳に挟んだ補足（確証無し）：
+・「天井のオブジェクトが変化する」というのは、実際に見た人が「光が変わった」と表現したのが段々と具体化したんじゃないか、という話。
+・誰かがその「変化」を順序立てて説明した結果、物語が進行形式になった可能性もある。
+</div>
+</div>
+</article>
+
+<!-- 72 nostalgic -->
+<article id="p72" class="post">
+<div class="num">72</div>
+<div>
+<div class="meta"><span class="name">懐古厨</span> <span class="date">2013/06/12(水) 02:49:31</span> <span class="id">ID:Retro</span></div>
+<div class="body">90年代のBBS文化みたいで好きなんだが、気味悪いところは気味悪い。</div>
+</div>
+</article>
+
+<!-- 73 short -->
+<article id="p73" class="post">
+<div class="num">73</div>
+<div>
+<div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:50:11</span> <span class="id">ID:Trp9L</span></div>
+<div class="body">夢で見たのは俺だけじゃなかったのか…？</div>
+</div>
+</article>
+
+<!-- 74 long introspective -->
+<article id="p74" class="post">
+<div class="num">74</div>
+<div>
+<div class="meta"><span class="name">眠れぬ者</span> <span class="date">2013/06/12(水) 02:51:58</span> <span class="id">ID:Insom</span></div>
+<div class="body">
+夢の中で同じ場所を何度も見るって、現実で答えを出せない問題を脳が処理しているって説がある。
+だから「戻ってこれなくなる」と表現する人は、自分の中の問題（現実の課題）に囚われてるのかもしれない。
+そう考えると話が少し冷静に見える。
+</div>
+</div>
+</article>
+
+<!-- 75 nitpicky -->
+<article id="p75" class="post">
+<div class="num">75</div>
+<div>
+<div class="meta"><span class="name">ケチつけ屋</span> <span class="date">2013/06/12(水) 02:53:17</span> <span class="id">ID:Critic</span></div>
+<div class="body">でもその説明だと怪談として弱い。やはり物理的な裏付けが欲しい。</div>
+</div>
+</article>
+
+<!-- 76: someone claims to have a sketch -->
+<article id="p76" class="post">
+<div class="num">76</div>
+<div>
+<div class="meta"><span class="name">落書き持ち</span> <span class="date">2013/06/12(水) 02:54:01</span> <span class="id">ID:Sketcher</span></div>
+<div class="body">
+聞いた話を元に簡単に間取り描いてみた（画像貼れないから文字で）
+
+中央：大ホール（円形）
+上：細長い回廊（展示スペースっぽい）
+下：堀のような貯水スペース（深さ不明）
+左右：小部屋群（用途不明）
+あくまで聞き取りベース。
+</div>
+</div>
+</article>
+
+<!-- 77 reaction -->
+<article id="p77" class="post">
+<div class="num">77</div>
+<div>
+<div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 02:55:19</span> <span class="id">ID:Qp9aLx3K0</span></div>
+<div class="body">>>76 いいぞ。文字だけでもイメージ湧く。</div>
+</div>
+</article>
+
+<!-- 78 prank -->
+<article id="p78" class="post">
+<div class="num">78</div>
+<div>
+<div class="meta"><span class="name">嘘松</span> <span class="date">2013/06/12(水) 02:56:00</span> <span class="id">ID:Lie</span></div>
+<div class="body">実は俺が作った都市伝説なんだが（ﾄﾞﾔ</div>
+</div>
+</article>
+
+<!-- 79 responders -->
+<article id="p79" class="post">
+<div class="num">79</div>
+<div>
+<div class="meta"><span class="name">複数人の返信</span> <span class="date">2013/06/12(水) 02:56:45</span> <span class="id">ID:Group</span></div>
+<div class="body">
+>>78
+お前かー（察し）
+でも本当に「誰が付けたか分からない名前」ってあるよな、ソース不明で広まる奴。
+</div>
+</div>
+</article>
+
+<!-- 80 cryptic -->
+<article id="p80" class="post">
+<div class="num">80</div>
+<div>
+<div class="meta"><span class="name">どこかの読者</span> <span class="date">2013/06/12(水) 02:58:10</span> <span class="id">ID:Reader</span></div>
+<div class="body">「ここに居ると眠りたくなる」っての、俺も似たような夢ある。こわい。</div>
+</div>
+</article>
+
+<!-- 81 tangential -->
+<article id="p81" class="post">
+<div class="num">81</div>
+<div>
+<div class="meta"><span class="name">雑談枠</span> <span class="date">2013/06/12(水) 02:59:01</span> <span class="id">ID:Chatter</span></div>
+<div class="body">ところで今日の晩飯なににする？（←真夏の夜の雑談）</div>
+</div>
+</article>
+
+<!-- 82 annoyed -->
+<article id="p82" class="post">
+<div class="num">82</div>
+<div>
+<div class="meta"><span class="name">少し冷めた人</span> <span class="date">2013/06/12(水) 03:00:12</span> <span class="id">ID:ColdOne</span></div>
+<div class="body">>>81 ここでそれ言うなｗ</div>
+</div>
+</article>
+
+<!-- 83 "I saw a log" -->
+<article id="p83" class="post">
+<div class="num">83</div>
+<div>
+<div class="meta"><span class="name">アーカイブ厨</span> <span class="date">2013/06/12(水) 03:01:05</span> <span class="id">ID:Archivist</span></div>
+<div class="body">
+確認したけど、古いBBSのキャッシュに「白い大ホール」の断片ログがあった。
+ただし本文は短く、場所や名前は特定されてない。
+これが元で枝葉が付いた可能性が高い。
+</div>
+</div>
+</article>
+
+<!-- 84 "weird reply chain" -->
+<article id="p84" class="post">
+<div class="num">84</div>
+<div>
+<div class="meta"><span class="name">名無し</span> <span class="date">2013/06/12(水) 03:02:00</span> <span class="id">ID:Chain</span></div>
+<div class="body">
+>>83
+じゃあほらやっぱり…
+>>1 は単なるまとめ屋ってことか（疑念）
+でもキャッシュがあるなら話は違ってくる。
+</div>
+</div>
+</article>
+
+<!-- 85 playful -->
+<article id="p85" class="post">
+<div class="num">85</div>
+<div>
+<div class="meta"><span class="name">無害</span> <span class="date">2013/06/12(水) 03:03:40</span> <span class="id">ID:Harmless</span></div>
+<div class="body">誰かゲーム化してくれ。これマップ作れば面白そう。</div>
+</div>
+</article>
+
+<!-- 86 "memory" -->
+<article id="p86" class="post">
+<div class="num">86</div>
+<div>
+<div class="meta"><span class="name">記憶屋</span> <span class="date">2013/06/12(水) 03:04:31</span> <span class="id">ID:Memo</span></div>
+<div class="body">
+夢や噂が強く残る人は、些細な線（音や匂い）をトリガーにして繰り返し思い出すんだよ。
+それが他人に伝播するとイメージが洗練される。
+だから同じ表現が増える。
+</div>
+</div>
+</article>
+
+<!-- 87 "creepy small detail" -->
+<article id="p87" class="post">
+<div class="num">87</div>
+<div>
+<div class="meta"><span class="name">気にする人</span> <span class="date">2013/06/12(水) 03:05:22</span> <span class="id">ID:Worry</span></div>
+<div class="body">聞いた噂の中に「誰も声を発しない」という表現があって、それが一番ゾッとした。</div>
+</div>
+</article>
+
+<!-- 88 "quiet" reply -->
+<article id="p88" class="post">
+<div class="num">88</div>
+<div>
+<div class="meta"><span class="name">反応薄</span> <span class="date">2013/06/12(水) 03:06:10</span> <span class="id">ID:Muted</span></div>
+<div class="body">無言はリアルの恐怖を増幅するよね</div>
+</div>
+</article>
+
+<!-- 89 "overly eager" -->
+<article id="p89" class="post">
+<div class="num">89</div>
+<div>
+<div class="meta"><span class="name">探索者志望</span> <span class="date">2013/06/12(水) 03:07:05</span> <span class="id">ID:Seek</span></div>
+<div class="body">行ってみたい。夜中に忍び込む系のホラーやりたい</div>
+</div>
+</article>
+
+<!-- 90 moderator-style -->
+<article id="p90" class="post">
+<div class="num">90</div>
+<div>
+<div class="meta"><span class="name">注意喚起</span> <span class="date">2013/06/12(水) 03:07:50</span> <span class="id">ID:Warn</span></div>
+<div class="body">実際に場所を探すな。無意味に危険を呼び込むだけだ。</div>
+</div>
+</article>
+
+<!-- 91 "meta-joke" -->
+<article id="p91" class="post">
+<div class="num">91</div>
+<div>
+<div class="meta"><span class="name">自分語り係</span> <span class="date">2013/06/12(水) 03:08:33</span> <span class="id">ID:MeMe</span></div>
+<div class="body">俺の彼女も「聞きたくない」と言ってた（聞いてといて草）</div>
+</div>
+</article>
+
+<!-- 92 "long-scary hint but vague" -->
+<article id="p92" class="post">
+<div class="num">92</div>
+<div>
+<div class="meta"><span class="name">名前を出さない人</span> <span class="date">2013/06/12(水) 03:09:40</span> <span class="id">ID:Anon</span></div>
+<div class="body">
+ある断片だけ言うと、あの場では「順序」が重要だと誰かが呟いていたという。
+順序を崩すと何かが止まる、そんな噂。
+だが詳細は不明、触れない方がいい。
+</div>
+</div>
+</article>
+
+<!-- 93 "salty" -->
+<article id="p93" class="post">
+<div class="num">93</div>
+<div>
+<div class="meta"><span class="name">飽きっぽい</span> <span class="date">2013/06/12(水) 03:10:15</span> <span class="id">ID:Bored</span></div>
+<div class="body">話わかったから飯食ってくるわ</div>
+</div>
+</article>
+
+<!-- 94 "weird parable" -->
+<article id="p94" class="post">
+<div class="num">94</div>
+<div>
+<div class="meta"><span class="name">寓話好き</span> <span class="date">2013/06/12(水) 03:11:02</span> <span class="id">ID:Fable</span></div>
+<div class="body">
+白い空間の話は、人間の居場所に対する寓話だと思うよ。
+場所の消失、名前の付与、忘却のサイクル──それ自体が物語だ。
+</div>
+</div>
+</article>
+
+<!-- 95 "random noise" ignored -->
+<article id="p95" class="post ignored">
+<div class="num">95</div>
+<div>
+<div class="meta"><span class="name">どうでもいい</span> <span class="date">2013/06/12(水) 03:11:45</span> <span class="id">ID:Noise</span></div>
+<div class="body">あああああああ</div>
+</div>
+</article>
+
+<!-- 96 "someone claims to be close" -->
+<article id="p96" class="post">
+<div class="num">96</div>
+<div>
+<div class="meta"><span class="name">近隣民（嘘くさい）</span> <span class="date">2013/06/12(水) 03:12:36</span> <span class="id">ID:Near</span></div>
+<div class="body">俺の家の近くに似た廃病院があるけど関係あるのかな？（住所は言わない）</div>
+</div>
+</article>
+
+<!-- 97 "skeptical but poetic" -->
+<article id="p97" class="post">
+<div class="num">97</div>
+<div>
+<div class="meta"><span class="name">皮肉屋</span> <span class="date">2013/06/12(水) 03:13:20</span> <span class="id">ID:Sarcasm</span></div>
+<div class="body">「誰かの心の地図を読むゲーム」って言ったらロマンあるやん（言い訳）</div>
+</div>
+</article>
+
+<!-- 98 "closing in" -->
+<article id="p98" class="post">
+<div class="num">98</div>
+<div>
+<div class="meta"><span class="name">整理屋</span> <span class="date">2013/06/12(水) 03:14:10</span> <span class="id">ID:Sorter</span></div>
+<div class="body">
+現時点で確実そうなまとめ：
+・断片的ログの存在（キャッシュ）あり<br>
+・多くは「夢的体験」報告<br>
+・物理的な特定は不可能（現状）
+</div>
+</div>
+</article>
+
+<!-- 99 "peacemaker" -->
+<article id="p99" class="post">
+<div class="num">99</div>
+<div>
+<div class="meta"><span class="name">穏やかに見守る</span> <span class="date">2013/06/12(水) 03:15:00</span> <span class="id">ID:Calm</span></div>
+<div class="body">あんまり突っ込みすぎずに、話を残しておくのが良い。議論は続くだろう。</div>
+</div>
+</article>
+
+<!-- 100 -->
+<article id="p100" class="post">
+<div class="num">100</div>
+<div>
+<div class="meta"><span class="name">本当にあった怖い名無し</span> <span class="date">2013/06/12(水) 03:16:20</span> <span class="id">ID:Qp9aLx3K0</span></div>
+<div class="body">((((；ﾟДﾟ))))ｶﾞｸｶﾞｸﾌﾞﾙﾌﾞﾙ</div>
 </div>
 </article>
 
 </div> <!-- posts -->
 
-<!-- footer actions -->
 <div class="thread-footer">
 <button class="btn" onclick="location.href='index.html'">まとめに戻る</button>
 <a class="btn" href="space_ad.html" style="text-decoration:none; color:inherit;">この空間に違和感はありませんか？（調査）</a>
@@ -900,7 +1382,8 @@ SNSも更新止まってる。</div>
 <p style="margin:10px 0 0; color:#555;">
 タイトル：The tragic space知ってる奴いる？<br>
 立て：2013/06/12 01:14<br>
-レス：50（無視レスは初期折りたたみ）
+表示：50（Part1）<br>
+備考：一部短文は初期折りたたみ
 </p>
 <p style="margin-top:10px;"><a href="#p1" class="linkish">最初へ</a> · <a href="#p50" class="linkish">最新へ</a></p>
 </div>
@@ -908,9 +1391,9 @@ SNSも更新止まってる。</div>
 <div class="side-card">
 <h3 style="margin:0; font-size:14px; color:#0b2540;">関連まとめ</h3>
 <ul style="margin:10px 0 0; padding-left:16px; color:#444; font-size:13px;">
-<li><a href="story3.html">幽霊屋敷訪問記録</a></li>
-<li><a href="boards/haunted_house.html">幽霊屋敷まとめ（一覧）</a></li>
-<li><a href="boards/vanishing_stop.html">消えるバス停（議論）</a></li>
+<li><a href="404.html">幽霊屋敷訪問記録</a></li>
+<li><a href="boards/404.html">幽霊屋敷まとめ（一覧）</a></li>
+<li><a href="boards/404.html">消えるバス停（議論）</a></li>
 </ul>
 </div>
 
@@ -925,7 +1408,7 @@ SNSも更新止まってる。</div>
 <p style="margin:8px 0 0; color:#666; font-size:13px;">
 ・このページは個人が編集した保存版です。<br>
 ・外部リンクは評価を行っていません。<br>
-・ファイルは小文字で統一してください。
+・存在しないURLは意図的に未公開（404.html）にしています。
 </p>
 </div>
 
@@ -933,26 +1416,17 @@ SNSも更新止まってる。</div>
 
 </div> <!-- columns -->
 
-<div class="footer">このページは個人保管のアーカイブです。掲載情報の真偽について運営は一切の責任を負いません。存在しないURLは意図的に未公開（404）にしています。</div>
+<div class="footer">このページは個人保管のアーカイブです。掲載情報の真偽について運営は一切の責任を負いません。</div>
 
-</div>
+</div> <!-- wrapper -->
 
-<!-- ===== JavaScript（機能のみ。アニメーションは一切なし） ===== -->
+<!-- ===== JavaScript（機能のみ） ===== -->
 <script>
 (function(){
 
 // helper
 function $(sel){ return document.querySelector(sel); }
 function $all(sel){ return Array.from(document.querySelectorAll(sel)); }
-
-// copy permalink for a post
-window.copyPermalink = function(e, num){
-if(e) e.preventDefault();
-const url = location.origin + location.pathname + "#p" + num;
-if(navigator.clipboard && navigator.clipboard.writeText){
-navigator.clipboard.writeText(url).then(function(){ alert("パーマリンクをコピーしました:\n" + url); }, function(){ prompt("パーマリンク（コピー用）", url); });
-} else { prompt("パーマリンク（コピー用）", url); }
-};
 
 // font size control
 var bodyTexts = $all('.post .body');
@@ -972,20 +1446,12 @@ ignoredBtn.textContent = ignoredHidden ? '無視レスを表示' : '無視レス
 updateVisibleCount();
 });
 
-// initial hide ignored (already handled by CSS, but ensure count)
+// initial hide ignored (CSS ensures, but set explicitly)
 $all('.post.ignored').forEach(function(p){ p.style.display = 'none'; });
 
-// smooth-ish (no animation) jump to top/bottom using hash
+// smooth-ish jump to top/bottom using hash
 document.getElementById('toTop').addEventListener('click', function(){ location.hash = '#p1'; document.getElementById('p1')?.scrollIntoView(); });
 document.getElementById('toBottom').addEventListener('click', function(){ location.hash = '#p50'; document.getElementById('p50')?.scrollIntoView(); });
-
-// copyAll: copies page URL (could be used to share)
-document.getElementById('copyAll').addEventListener('click', function(){
-var url = location.href;
-if(navigator.clipboard && navigator.clipboard.writeText){
-navigator.clipboard.writeText(url).then(function(){ alert("このスレのURLをコピーしました:\n" + url); }, function(){ prompt("URL（コピー用）", url); });
-} else { prompt("URL（コピー用）", url); }
-});
 
 // night mode toggle (no animation)
 document.getElementById('nightBtn').addEventListener('click', function(){
@@ -1010,7 +1476,7 @@ document.getElementById('countVisible').textContent = visible;
 }
 updateVisibleCount();
 
-// if hash present on load, jump to it (no smooth animation)
+// if hash present on load, jump to it
 window.addEventListener('load', function(){
 if(location.hash){
 var el = document.querySelector(location.hash);
