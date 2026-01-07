@@ -1,205 +1,549 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>404 Not Found - オカ板まとめ</title>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>404 — 見つかりませんでした</title>
+<meta name="robots" content="noindex, nofollow">
 <style>
+/* ======================
+404 Page — 独自デザイン
+- 横書き
+- スマホ最適化
+- 多少のアニメーション（控えめ）
+- イースターエッグ: 404を3回クリックで秘密表示
+====================== */
+
+/* Reset-ish */
+* { box-sizing: border-box; margin:0; padding:0; }
+html,body { height:100%; }
 body {
-margin: 0;
-font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-background: #f5f5f5;
-color: #222;
+font-family: "Helvetica Neue", "Arial", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+background: #0e0f12; /* 黒に近いダーク基調 */
+color: #e6eef8;
+-webkit-font-smoothing:antialiased;
+-moz-osx-font-smoothing:grayscale;
+line-height:1.6;
+overflow-y:scroll;
 }
 
-header {
-background: #2a2a2a;
-color: #fff;
-padding: 16px 24px;
-font-size: 20px;
-font-weight: bold;
-border-bottom: 3px solid #444;
+/* page container */
+.wrapper {
+max-width:1100px;
+margin:28px auto;
+padding:24px;
 }
 
-.container {
-max-width: 860px;
-margin: 40px auto;
-padding: 0 16px;
+/* Top small nav — neutral */
+.topbar {
+display:flex;
+align-items:center;
+gap:12px;
+justify-content:space-between;
+color:#9fb3d6;
+font-size:13px;
+margin-bottom:18px;
+}
+.brand {
+display:flex; gap:12px; align-items:center;
+}
+.brand .mark {
+width:44px; height:44px; border-radius:8px;
+background:linear-gradient(135deg,#243b55,#1a2a3d);
+display:flex; align-items:center; justify-content:center;
+font-weight:800; color:#dfeeff; font-size:16px;
+box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+.brand .title { font-weight:700; color:#cfe3fb; }
+.top-links a { color:#7695b6; text-decoration:none; margin-left:10px; }
+
+/* Main grid: left content + right utility */
+.grid {
+display:grid;
+grid-template-columns: 1fr 340px;
+gap:20px;
+align-items:start;
 }
 
-.box {
-background: #fff;
-border: 1px solid #ddd;
-border-radius: 8px;
-padding: 28px;
-box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-position: relative;
-overflow: hidden;
+/* Left: big artwork + message */
+.canvas {
+background: linear-gradient(180deg, #0c1014 0%, #0a0c0e 100%);
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.03);
+padding:28px;
+position:relative;
+overflow:hidden;
+min-height:420px;
+box-shadow: 0 20px 60px rgba(2,6,23,0.6);
 }
 
-.error-code {
-font-size: 72px;
-font-weight: bold;
-color: #a80000;
-letter-spacing: 4px;
+/* stylized broken-grid behind */
+.bg-grid {
+position:absolute;
+inset:0;
+background-image:
+linear-gradient(0deg, rgba(255,255,255,0.018) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+background-size: 40px 40px, 40px 40px;
+opacity:0.5;
+pointer-events:none;
+mix-blend-mode:overlay;
 }
 
-.error-title {
-font-size: 20px;
-font-weight: bold;
-margin-bottom: 16px;
+/* central 404 area */
+.big-404 {
+display:flex;
+gap:18px;
+align-items:center;
+justify-content:flex-start;
+flex-wrap:wrap;
+position:relative;
+z-index:3;
+}
+.num {
+font-size:88px;
+font-weight:900;
+letter-spacing:-0.02em;
+color:#e9f7ff;
+text-shadow: 0 6px 18px rgba(0,0,0,0.7);
+cursor:pointer;
+user-select:none;
+-webkit-user-select:none;
 }
 
+/* subtle "scanline" animated shimmer on the digits */
+@keyframes scan {
+0% { background-position: -200px 0; }
+100% { background-position: 200px 0; }
+}
+.num::before{
+content: '';
+position:absolute;
+left:0; top:0; right:0; bottom:0;
+background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0) 100%);
+mix-blend-mode:overlay;
+opacity:0.18;
+pointer-events:none;
+transform:translateZ(0);
+animation: scan 4s linear infinite;
+/* mild animation allowed per request */
+}
+
+/* message column */
 .message {
-font-size: 14px;
-line-height: 1.9;
-color: #333;
+max-width:640px;
+color:#d8e9fb;
+}
+.h1 {
+font-size:20px;
+font-weight:800;
+color:#dff4ff;
+margin-bottom:6px;
+}
+.lead {
+color:#a8c4dd;
+margin-bottom:12px;
+font-size:15px;
 }
 
-.warn {
-color: #a80000;
-font-weight: bold;
+/* suggestions box */
+.suggestions {
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:18px;
+}
+.sugg {
+background:rgba(255,255,255,0.03);
+padding:10px 12px;
+border-radius:8px;
+border:1px solid rgba(255,255,255,0.02);
+font-size:14px;
+color:#cfe4fb;
+}
+.sugg a { color:#bfe6ff; text-decoration:none; font-weight:700; }
+
+/* faux-broken mini-map */
+.mini-map {
+margin-top:22px;
+border-radius:8px;
+background: linear-gradient(180deg,#061018,#07101a);
+padding:12px;
+border:1px solid rgba(255,255,255,0.03);
+color:#8faecf;
+font-size:13px;
+}
+.mini-map .row { display:flex; gap:8px; align-items:center; margin-bottom:8px; }
+.dot { width:10px; height:10px; border-radius:999px; background:#9cc3ff; opacity:0.9; }
+.dot.off { background:#3a505f; opacity:0.5; }
+
+/* Right: utilities */
+.side {
+position:relative;
+}
+.side .card {
+background: linear-gradient(180deg,#071426,#05101a);
+padding:14px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.02);
+color:#cfe6ff;
+font-size:14px;
+box-shadow: 0 8px 30px rgba(2,6,23,0.5);
+margin-bottom:14px;
+}
+.side .card h3 { margin:0 0 8px 0; color:#e8f9ff; font-size:15px; }
+.side .card p { margin:0; color:#a9c9ea; line-height:1.7; }
+
+/* search UI (no backend) */
+.search {
+display:flex;
+gap:8px;
+margin-top:8px;
+}
+.search input[type="search"] {
+flex:1;
+padding:10px 12px;
+border-radius:8px;
+border:1px solid rgba(255,255,255,0.06);
+background: rgba(255,255,255,0.02);
+color:#e6f4ff;
+font-size:14px;
+outline:none;
+}
+.search button {
+padding:10px 12px;
+border-radius:8px;
+border:1px solid rgba(255,255,255,0.04);
+background:#1d2f3f;
+color:#cfe8ff;
+font-weight:700;
+cursor:pointer;
 }
 
-.hr {
-margin: 24px 0;
-border-top: 1px dashed #ccc;
+/* playful "error code confetti" - subtle */
+.confetti {
+position:absolute;
+right:-40px;
+top:-40px;
+width:200px;
+height:200px;
+pointer-events:none;
+z-index:2;
+opacity:0.12;
+background-image:
+radial-gradient(circle at 10% 20%, rgba(255,255,255,0.6) 2px, transparent 2px),
+radial-gradient(circle at 60% 40%, rgba(180,220,255,0.45) 2px, transparent 2px),
+radial-gradient(circle at 40% 70%, rgba(140,180,220,0.35) 2px, transparent 2px);
+mix-blend-mode:screen;
 }
 
-.links a {
-display: inline-block;
-margin-right: 18px;
-font-size: 14px;
-color: #0066cc;
-text-decoration: none;
+/* footer area */
+.footer {
+margin-top:18px;
+color:#8faecf;
+font-size:13px;
+text-align:center;
+opacity:0.9;
 }
 
-.links a:hover {
-color: #cc0000;
-text-decoration: underline;
+/* SECRET modal (hidden initially) */
+.modal-backdrop {
+position:fixed;
+inset:0;
+background: rgba(0,0,0,0.6);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:40;
+}
+.modal {
+background: linear-gradient(180deg,#071428,#05101a);
+color:#dff8ff;
+padding:22px;
+border-radius:10px;
+max-width:720px;
+width:90%;
+border:1px solid rgba(255,255,255,0.05);
+text-align:left;
+}
+.modal h2 { margin:0 0 8px 0; font-size:18px; color:#bfeaff; }
+.modal p { margin:0 0 12px 0; color:#cceeff; font-size:15px; line-height:1.7; }
+
+/* click counter visual */
+.counter {
+margin-top:12px;
+font-size:13px;
+color:#8fb7db;
 }
 
-.footnote {
-margin-top: 26px;
-font-size: 12px;
-color: #777;
-line-height: 1.7;
+/* small screens */
+@media (max-width:960px) {
+.grid { grid-template-columns: 1fr; }
+.num { font-size:72px; text-align:left; }
+.mini-map { display:none; }
+.side { order:2; }
+.canvas { order:1; min-height:360px; padding:18px; }
+.wrapper { padding:12px; margin:12px auto; }
 }
 
-/* 不穏な影 */
-.box::after {
-content: "";
-position: absolute;
-inset: 0;
-background: radial-gradient(circle at 80% 20%, rgba(168,0,0,0.05), transparent 40%);
-pointer-events: none;
-}
-
-/* ログ風テキスト（最初は非表示） */
-.admin-log {
-display: none;
-margin-top: 28px;
-padding: 16px;
-background: #111;
-color: #cfcfcf;
-font-family: monospace;
-font-size: 12px;
-line-height: 1.7;
-border-radius: 6px;
-}
-
-.admin-log .alert {
-color: #ff6b6b;
-}
-
-/* フェード演出 */
-.fade {
-opacity: 0;
-transition: opacity 1.5s ease;
-}
-.fade.show {
-opacity: 1;
+/* VERY SMALL phones */
+@media (max-width:420px) {
+.num { font-size:56px; }
+.lead { font-size:14px; }
+.brand .mark { width:40px; height:40px; font-size:14px; }
 }
 </style>
 </head>
-
 <body>
-<header>オカ板まとめ</header>
 
-<div class="container">
-<div class="box">
+<div class="wrapper" aria-labelledby="pageTitle">
 
-<div class="error-code">404</div>
-<div class="error-title">Not Found — スレッドが見つかりません</div>
-
-<div class="message fade" id="mainMessage">
-お探しのページは以下の理由により表示できません。<br><br>
-
-・そのスレッドは <span class="warn">存在しない板</span> に属しています。<br>
-・管理人により <span class="warn">削除</span>、または <span class="warn">隔離</span> されました。<br>
-・URLが間違っている可能性があります。<br><br>
-
-※このページはログに記録されます。
+<!-- top bar -->
+<div class="topbar">
+<div class="brand" aria-hidden="false">
+<div class="mark">⊘</div>
+<div>
+<div class="title">探索不在局</div>
+<div style="font-size:12px; color:#88a7c4;">— 一時的にここに何もありません —</div>
+</div>
+</div>
+<div class="top-links">
+<a href="index.html">まとめトップ</a>
+<a href="story.html">現在のスレ</a>
+<a href="space_ad.html">調査ページ</a>
+</div>
 </div>
 
-<div class="hr"></div>
+<div class="grid">
 
-<div class="links fade" id="links">
-<a href="index.html">▶ まとめトップに戻る</a>
-<a href="javascript:history.back()">▶ 前のページに戻る</a>
+<!-- LEFT: main canvas -->
+<section class="canvas" role="main" aria-labelledby="canvasTitle">
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="confetti" aria-hidden="true"></div>
+
+<div class="big-404" role="img" aria-label="404 not found">
+<!-- The clickable large digits -->
+<div class="num" id="big404" title="ページが見つかりません（クリックしてみる）">404</div>
+
+<div class="message">
+<div class="h1" id="canvasTitle">お探しのページは見つかりませんでした</div>
+<div class="lead">URLが変わったか、リンク先が削除されたようです。以下の代替案を試すか、トップへ戻ってください。</div>
+
+<div class="suggestions" aria-hidden="false">
+<div class="sugg"><a href="index.html">まとめトップへ戻る</a></div>
+<div class="sugg"><a href="story.html">同スレの保存版へ</a></div>
+<div class="sugg"><a href="space_ad.html">調査ページ（参考）</a></div>
+<div class="sugg" id="hintSugg">こっそり3回クリックで何か起きるかも…</div>
 </div>
 
-<div class="admin-log fade" id="adminLog">
-[system] request_id: 9f2c-404-oclt
-[system] status: NOT_FOUND
-[system] board_check: failed
-[system] access_time: <span id="time"></span>
-
-<span class="alert">[alert]</span> 非公開ログへのアクセスが試行されました
-<span class="alert">[alert]</span> この操作は記録されました
+<div class="mini-map" aria-hidden="false">
+<div class="row"><span class="dot off" aria-hidden="true"></span> 既存リンク（正常）</div>
+<div class="row"><span class="dot" aria-hidden="true"></span> このURL（見つからない）</div>
+<div class="row"><span class="dot off" aria-hidden="true"></span> 外部（未接続）</div>
+<div style="margin-top:8px; color:#93b9de; font-size:13px;">ヒント：404の数字を連打しても何かが起きます（3回）。</div>
 </div>
 
-<div class="footnote fade" id="footnote">
-※表示されないページについて、管理人への問い合わせは受け付けていません。<br>
-※一定回数以上のアクセスは自動的に制限される場合があります。
+<div class="counter" id="counterText">クリック: 0 / 3</div>
+</div>
 </div>
 
+<!-- friendly apology -->
+<div style="margin-top:18px; color:#94b8d9; font-size:14px;">
+我々はリンクの終端を保守していません。もしこのページが重要であれば、トップに戻って再探索してください。
+</div>
+</section>
+
+<!-- RIGHT: sidebar utilities -->
+<aside class="side" role="complementary" aria-label="404 utilities">
+
+<div class="card" aria-hidden="false">
+<h3>何が起きた？</h3>
+<p>簡単に言うと「要求された資源がサーバ上に存在しない」か、移動されています。様々な理由が考えられますが、ここでは掘り下げず代替案を提示します。</p>
+</div>
+
+<div class="card" aria-hidden="false">
+<h3>簡易検索（UIのみ）</h3>
+<div class="search" role="search">
+<input id="fakeSearch" type="search" placeholder="スレッドタイトルを入力（例：The tragic space）" aria-label="検索">
+<button id="searchBtn">検索</button>
+</div>
+<p id="searchHint" style="margin-top:8px; color:#9db8d9; font-size:13px;">※ 検索ボタンはインタラクティブですが外部検索は行いません（ローカル案内）。</p>
+</div>
+
+<div class="card" aria-hidden="false">
+<h3>テクニカルノート</h3>
+<p style="font-family:monospace; color:#9db8d9; margin-top:8px; font-size:13px;">エラーコード: 404<br>TTL: 0x0A<br>トレースID: —</p>
+</div>
+
+<div class="card" aria-hidden="false">
+<h3>手早い復旧案</h3>
+<p style="color:#bfe8ff;">- URLのtypoチェック<br>- 親ページ（トップ）から探す<br>- 管理者に連絡（この環境では非公開）</p>
+</div>
+
+</aside>
+
+</div> <!-- grid -->
+
+<div class="footer" role="contentinfo">
+— ページが見つからない場合の案内 —　（遊び要素あり：404を3回クリックで秘密メッセージ）
+</div>
+
+</div> <!-- wrapper -->
+
+<!-- SECRET MODAL -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+<div class="modal" role="document" aria-labelledby="secretTitle">
+<h2 id="secretTitle">秘密のメッセージ</h2>
+<p id="secretText">……あなたは見つけてしまった。<br>ここだけの話：探すこと自体が一つの場所です。</p>
+<p style="margin-top:10px; color:#a9d8ff; font-size:13px;">ヒント：localStorage に記録されます。リセットしたい場合は下の「リセット」ボタンを押してください。</p>
+<div style="margin-top:12px; display:flex; gap:8px;">
+<button id="closeModal" class="btn">閉じる</button>
+<button id="revealMore" class="btn">詳しい言葉を見る</button>
+<button id="resetSecret" class="btn" style="margin-left:auto;">リセット</button>
+</div>
+
+<div id="extraSecret" style="margin-top:12px; display:none; color:#bfeaff; font-size:14px;">
+<strong>追記：</strong>「見つからない」と思った地点が、あなたの探索の起点になっています。よい旅を。
+</div>
 </div>
 </div>
 
 <script>
-// 時刻表示
-document.getElementById("time").textContent =
-new Date().toLocaleString("ja-JP");
+/* ============================
+404 page JS (pure client-side)
+- click counter on #big404
+- 3 clicks reveal secret modal
+- counts persisted in localStorage
+- simple fake search handler
+- accessibility friendly
+============================ */
 
-// フェードイン演出
-setTimeout(() => {
-document.getElementById("mainMessage").classList.add("show");
-}, 400);
+(function(){
+const big404 = document.getElementById('big404');
+const counterText = document.getElementById('counterText');
+const backdrop = document.getElementById('modalBackdrop');
+const closeModal = document.getElementById('closeModal');
+const revealMore = document.getElementById('revealMore');
+const resetSecret = document.getElementById('resetSecret');
+const extraSecret = document.getElementById('extraSecret');
+const searchBtn = document.getElementById('searchBtn');
+const fakeSearch = document.getElementById('fakeSearch');
+const hintSugg = document.getElementById('hintSugg');
 
-setTimeout(() => {
-document.getElementById("links").classList.add("show");
-}, 900);
-
-// 管理人ログ表示（遅れて出る）
-setTimeout(() => {
-const log = document.getElementById("adminLog");
-log.style.display = "block";
-log.classList.add("show");
-}, 2200);
-
-// フッター表示
-setTimeout(() => {
-document.getElementById("footnote").classList.add("show");
-}, 3000);
-
-// 404迷路：一定確率で別の404へ飛ばす（実在しないURL）
-setTimeout(() => {
-if (Math.random() < 0.18) {
-window.location.href = "boards/hidden_log_" + Math.floor(Math.random()*9999) + ".html";
+const STORAGE_KEY = '404_secret_clicks_v1';
+let clicks = 0;
+// initialize from storage
+try {
+const stored = localStorage.getItem(STORAGE_KEY);
+if(stored) clicks = parseInt(stored,10) || 0;
+} catch(e){
+clicks = 0;
 }
-}, 4200);
+updateCounterDisplay();
+
+// click handler with keyboard accessibility
+big404.addEventListener('click', registerClick);
+big404.addEventListener('keydown', function(e){
+if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); registerClick(); }
+});
+big404.setAttribute('tabindex','0');
+big404.setAttribute('role','button');
+big404.setAttribute('aria-pressed','false');
+big404.title = 'この数字を3回クリックすると何か起きます';
+
+function saveClicks(){
+try { localStorage.setItem(STORAGE_KEY, String(clicks)); } catch(e){}
+}
+
+function updateCounterDisplay(){
+const display = Math.min(3, clicks);
+counterText.textContent = 'クリック: ' + display + ' / 3';
+big404.setAttribute('aria-pressed', String(display >= 3));
+// subtle UI hint change
+if(display >= 3){
+hintSugg.textContent = '秘密を見つけました — 表示を確認してください';
+} else {
+hintSugg.textContent = 'こっそり3回クリックで何か起きるかも…';
+}
+}
+
+function registerClick(){
+clicks++;
+saveClicks();
+updateCounterDisplay();
+// If reached 3 (or more), show modal
+if(clicks >= 3){
+showModal();
+}
+}
+
+function showModal(){
+backdrop.style.display = 'flex';
+backdrop.setAttribute('aria-hidden','false');
+// trap focus: focus close button
+closeModal.focus();
+}
+
+function hideModal(){
+backdrop.style.display = 'none';
+backdrop.setAttribute('aria-hidden','true');
+// return focus to big404
+big404.focus();
+}
+
+closeModal.addEventListener('click', function(){ hideModal(); });
+// clicking outside modal hides it
+backdrop.addEventListener('click', function(e){
+if(e.target === backdrop) hideModal();
+});
+
+revealMore.addEventListener('click', function(){
+extraSecret.style.display = 'block';
+revealMore.disabled = true;
+});
+
+resetSecret.addEventListener('click', function(){
+clicks = 0;
+saveClicks();
+updateCounterDisplay();
+extraSecret.style.display = 'none';
+hideModal();
+alert('シークレットカウントをリセットしました。');
+});
+
+// fake search handler: show small inline response (no network)
+searchBtn.addEventListener('click', function(e){
+e.preventDefault();
+const q = (fakeSearch.value || '').trim();
+if(!q){
+alert('検索ワードを入力してください（UIデモです）。');
+return;
+}
+// simple local routing simulation: if query contains 'tragic' or 'The tragic' -> offer story link
+const ql = q.toLowerCase();
+if(ql.indexOf('tragic') !== -1 || ql.indexOf('the tragic') !== -1 || ql.indexOf('the tragic space') !== -1){
+if(confirm('関連が見つかりました：The tragic space — このスレを開きますか？')) {
+location.href = 'story.html';
+}
+} else {
+alert('検索結果は見つかりませんでした（これはデモ検索です）。トップに戻って探してください。');
+}
+});
+
+// keyboard: Enter in search triggers search
+fakeSearch.addEventListener('keydown', function(e){
+if(e.key === 'Enter'){ searchBtn.click(); }
+});
+
+// Accessibility: allow ESC to close modal if open
+window.addEventListener('keydown', function(e){
+if(e.key === 'Escape' && backdrop.style.display === 'flex'){ hideModal(); }
+});
+
+// small fun: if user triple-clicks the "404" very quickly, show a different secret (not necessary)
+// (left as potential extension)
+
+})();
 </script>
 
 </body>
